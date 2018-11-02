@@ -36,7 +36,8 @@ void setup(void) {
 void loop(void) {
   /* ループ処理内で使用する変数 */
   char state = STATE_START; //初期状態は開始待ち状態
-
+  char through_startmodule_f = 0; //スタートモジュールを通過したフラグ
+  
   switch(state) {
     /* PCへSTARTメッセージを送り、返答を受け取ったらゲーム進行状態に遷移 */
     case STATE_START:
@@ -64,22 +65,27 @@ void loop(void) {
       }
 
       if(digitalRead(PIN_GOAL) == HIGH) { //通過したかどうか
-        if(comSlv != SLAVE_GOAL) { //ゴール以外のモジュール
+        if(through_startmodule_f == 0) { //スタートモジュールを通過したとき
           Send2pc(SERIAL_THROUGH); //PCへTHROUGHを送信
+          through_startmodule_f = 1;
+        } else {
+          if(comSlv != SLAVE_GOAL) { //ゴール以外のモジュール
+            Send2pc(SERIAL_THROUGH); //PCへTHROUGHを送信
 
-          Serial.print("BEGIN TRANSMISSION TO SLAVE");
-          Serial.println(comSlv);
-          Wire.beginTransmission(comSlv); //スレーブとの通信を開始
-          Wire.write(MASTER_DETECT_GOAL); //通過を確認すべきモジュールが次のモジュールへ遷移したことを通知
-          Wire.endTransmission(); //通信終了
-          delay(100); //念の為
-          Serial.print("END TRANSMISSION TO SLAVE");
-          Serial.println(comSlv);
+            Serial.print("BEGIN TRANSMISSION TO SLAVE");
+            Serial.println(comSlv);
+            Wire.beginTransmission(comSlv); //スレーブとの通信を開始
+            Wire.write(MASTER_DETECT_GOAL); //通過を確認すべきモジュールが次のモジュールへ遷移したことを通知
+            Wire.endTransmission(); //通信終了
+            delay(100); //念の為
+            Serial.print("END TRANSMISSION TO SLAVE");
+            Serial.println(comSlv);
 
-          SetSlv(); //通過したか確認すべきスモジュールを次のモジュールに変更
-        } else { //ゴールモジュール
-          state = STATE_FINISH;
-          Serial.println("STATE: FINISH");
+            SetSlv(); //通過したか確認すべきスモジュールを次のモジュールに変更
+          } else { //ゴールモジュール
+            state = STATE_FINISH;
+            Serial.println("STATE: FINISH");
+          }
         }
       }
 
