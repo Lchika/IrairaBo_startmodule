@@ -13,6 +13,8 @@ void SetSLV(void);
 SoftwareSerial swSerial(PIN_RX, PIN_TX);
 unsigned char slvNum = 2;          //スレーブの数(ゴールモジュールを除く) TODO:動的に変更できないか？
 unsigned char comSlv = SLAVE_1;    //通過したかどうかを確認すべきスレーブ
+char state = STATE_START; //初期状態は開始待ち状態
+char through_startmodule_f = 0; //スタートモジュールを通過したフラグ
 
 void setup(void) {
   Serial.begin(57600); //ハードウェアシリアル(デバッグ用)開始
@@ -35,8 +37,6 @@ void setup(void) {
  */
 void loop(void) {
   /* ループ処理内で使用する変数 */
-  char state = STATE_START; //初期状態は開始待ち状態
-  char through_startmodule_f = 0; //スタートモジュールを通過したフラグ
   
   switch(state) {
     /* PCへSTARTメッセージを送り、返答を受け取ったらゲーム進行状態に遷移 */
@@ -53,7 +53,7 @@ void loop(void) {
     /* 終了条件を満たしたら終了状態へ遷移 */
     case STATE_RUNNING:
       if(digitalRead(PIN_HIT) == HIGH) { //HIT判定があるかどうか
-        Send2pc(SERIAL_HIT); //PCへHITを送信
+        Send2pc(HIT); //PCへHITを送信
         Serial.print("BEGIN TRANSMISSION TO SLAVE");
         Serial.println(comSlv);
         Wire.beginTransmission(comSlv); //スレーブとの通信を開始
@@ -66,11 +66,11 @@ void loop(void) {
 
       if(digitalRead(PIN_GOAL) == HIGH) { //通過したかどうか
         if(through_startmodule_f == 0) { //スタートモジュールを通過したとき
-          Send2pc(SERIAL_THROUGH); //PCへTHROUGHを送信
+          Send2pc(THROUGH); //PCへTHROUGHを送信
           through_startmodule_f = 1;
         } else {
           if(comSlv != SLAVE_GOAL) { //ゴール以外のモジュール
-            Send2pc(SERIAL_THROUGH); //PCへTHROUGHを送信
+            Send2pc(THROUGH); //PCへTHROUGHを送信
 
             Serial.print("BEGIN TRANSMISSION TO SLAVE");
             Serial.println(comSlv);
@@ -93,12 +93,12 @@ void loop(void) {
 
     /* リセットされるまで待機 */
     case STATE_FINISH:
-      Send2pc(SERIAL_FINISH);
+      Send2pc(FINISH);
       break;
 
     default:
       /* ここには来ない */
-      Serial.println("!!BUG!!");
+      Serial.println("state BUG");
       break;
   }
 }
@@ -153,7 +153,7 @@ void Send2pc(char state) {
 
     default:
       /* ここには来ない */
-      Serial.println("!!BUG!!");
+      Serial.println("send BUG");
       break;
   }
 }
@@ -166,7 +166,7 @@ void SetSlv(void) {
     comSlv = SLAVE_GOAL;  //ゴールモジュールをセット
   } else {
     /* ここには来ない */
-    Serial.println("!!BUG!!");
+    Serial.println("!BUG!");
   }
   Serial.print("BEGIN TRANSMISSION TO SLAVE");
   Serial.println(comSlv);
