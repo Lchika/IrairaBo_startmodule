@@ -5,10 +5,15 @@
 #define _START_DEFINE_H_
 
 /* Arduino のピン定義 */
-#define PIN_GOAL 4  //ゴール判定ピン
-#define PIN_HIT  5  //当たった判定ピン
-#define PIN_RX   10 //ソフトウェアシリアルRX
-#define PIN_TX   11 //ソフトウェアシリアルTX
+#define PIN_GOAL       4  //ゴール判定ピン
+#define PIN_HIT_SLAVE  5  //当たった判定ピン(スレーブ)
+#define PIN_HIT_START  6  //当たった判定ピン(スタートモジュール)
+#define PIN_RX         10 //ソフトウェアシリアルRX
+#define PIN_TX         11 //ソフトウェアシリアルTX
+#define PIN_DIP_0          6 //DIPスイッチbit0
+#define PIN_DIP_1          7 //DIPスイッチbit1
+#define PIN_DIP_2          8 //DIPスイッチbit2
+#define PIN_DIP_3          9 //DIPスイッチbit3         
 
 /* PC とのソフトウェアシリアル通信関係 */
 /* 送信用関数への引数 */
@@ -31,6 +36,11 @@ const char SERIAL_FINISH  = 'f'; //終了
 #define SLAVE_2    2 //モジュール2のスレーブアドレス
 #define SLAVE_3    3 //モジュール3のスレーブアドレス
 #define SLAVE_4    4 //モジュール4のスレーブアドレス
+#define SLAVE_5    5 //モジュール2のスレーブアドレス
+#define SLAVE_6    6 //モジュール3のスレーブアドレス
+#define SLAVE_7    7 //モジュール4のスレーブアドレス
+#define SLAVE_8    8 //モジュール2のスレーブアドレス
+#define SLAVE_9    9 //モジュール3のスレーブアドレス
 /* スレーブへ送信する情報 */
 #define MASTER_BEGIN_TRANS 0 //通信を開始すること
 #define MASTER_DETECT_HIT  1 //HITを受信したこと
