@@ -8,6 +8,7 @@
 /* プロトタイプ宣言 */
 void Send2pc(char);
 void SetSLV(void);
+static void start_i2c_with_slave(unsigned char slave_address);
 
 /* クラス・変数宣言 */
 SoftwareSerial swSerial(PIN_RX, PIN_TX);
@@ -24,7 +25,8 @@ void setup(void) {
   Wire.begin(); //マスタとしてI2C開始
   Serial.println("I2C ready");
 
-  pinMode(PIN_GOAL, INPUT); //ゴール判定ピンを入力に設定
+  pinMode(PIN_GOAL_SLAVE, INPUT);   //ゴール判定ピン(スレーブ)を入力に設定
+  pinMode(PIN_GOAL_START, INPUT);   //ゴール判定ピン(スタート)を入力に設定
   pinMode(PIN_HIT_SLAVE, INPUT); //当たった判定ピン(スレーブ)を入力に設定
   pinMode(PIN_HIT_START, INPUT);  //当たった判定ピン(スタートモジュール)を入力に設定
   
@@ -34,8 +36,9 @@ void setup(void) {
   pinMode(PIN_DIP_2, INPUT);
   pinMode(PIN_DIP_3, INPUT);
 
-  slvNum = ReadDipSwitch();
-  comSlv = SetSlvAddressAtStart();
+  //slvNum = ReadDipSwitch();
+  slvNum = 1;         // debug
+  SetSlvAddressAtStart();
 }
 
 /*
@@ -46,7 +49,8 @@ void setup(void) {
 void loop(void) {
   /* ループ処理内で使用する変数 */
   static char state = STATE_START; //初期状態は開始待ち状態
-  static char through_startmodule_f = 0; //スタートモジュールを通過したフラグ
+  //static char through_startmodule_f = 0; //スタートモジュールを通過したフラグ
+  static unsigned char pin_goal = PIN_GOAL_START;
 
   switch(state) {
     /* PCへSTARTメッセージを送り、返答を受け取ったらゲーム進行状態に遷移 */
@@ -79,10 +83,12 @@ void loop(void) {
         Serial.println(comSlv);
       }
 
-      if(digitalRead(PIN_GOAL) == HIGH) { //通過したかどうか
-        if(through_startmodule_f == 0) { //スタートモジュールを通過したとき
+      if(digitalRead(pin_goal) == HIGH) { //通過したかどうか
+        if(pin_goal == PIN_GOAL_START) { //スタートモジュールを通過したとき
           Send2pc(THROUGH); //PCへTHROUGHを送信
-          through_startmodule_f = 1;
+          pin_goal = PIN_GOAL_SLAVE;  //確認対象ピンをスレーブからのゴール通知ピンに設定
+          //through_startmodule_f = 1;
+          start_i2c_with_slave(comSlv);
         } else {
           if(comSlv != SLAVE_GOAL) { //ゴール以外のモジュール
             Send2pc(THROUGH); //PCへTHROUGHを送信
@@ -213,10 +219,17 @@ void SetSlv(void) {
   }
   Serial.print("<SETSLV>BEGIN TRANSMISSION TO SLAVE");
   Serial.println(comSlv);
-  Wire.beginTransmission(comSlv); //スレーブとの通信を開始
-  Wire.write(MASTER_BEGIN_TRANS); //通過を確認すべきモジュールが自分であることを通知
-  Wire.endTransmission(); //通信終了
+  start_i2c_with_slave(comSlv);
   delay(100); //念の為
   Serial.print("END TRANSMISSION TO SLAVE");
   Serial.println(comSlv);
+}
+
+/* 引数で受け取ったスレーブアドレスのデバイスとI2C通信を始める */
+static void start_i2c_with_slave(unsigned char slave_address){
+  Serial.println("start_i2c_with_slave(" + String(slave_address) + ")");
+  Wire.beginTransmission(slave_address); //スレーブとの通信を開始
+  Wire.write(MASTER_BEGIN_TRANS); //通過を確認すべきモジュールが自分であることを通知
+  Wire.endTransmission(); //通信終了
+  return;
 }
