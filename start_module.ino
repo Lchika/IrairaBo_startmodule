@@ -16,10 +16,10 @@ unsigned char slvNum;          //スレーブの数(ゴールモジュールを�
 unsigned char comSlv;    //通過したかどうかを確認すべきスレーブ
 
 void setup(void) {
-  Serial.begin(57600); //ハードウェアシリアル(デバッグ用)開始
+  Serial.begin(DEBUG_HSERIAL_BAUDRATE); //ハードウェアシリアル(デバッグ用)開始
   Serial.println("HardwareSerial ready");
 
-  swSerial.begin(4800); //ソフトウェアシリアル(PCとの通信用)開始
+  swSerial.begin(DEBUG_HSERIAL_BAUDRATE); //ソフトウェアシリアル(PCとの通信用)開始
   Serial.println("SoftwareSerial ready");
 
   Wire.begin(); //マスタとしてI2C開始
@@ -36,8 +36,7 @@ void setup(void) {
   pinMode(PIN_DIP_2, INPUT);
   pinMode(PIN_DIP_3, INPUT);
 
-  //slvNum = ReadDipSwitch();
-  slvNum = 1;         // debug
+  slvNum = ReadDipSwitch();
   SetSlvAddressAtStart();
 }
 

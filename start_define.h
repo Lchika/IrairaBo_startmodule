@@ -18,6 +18,7 @@
 
 /* PC とのソフトウェアシリアル通信関係 */
 /* 送信用関数への引数 */
+#define PC_SSERIAL_BAUDRATE     9600  //ボーレート
 #define START   0
 #define HIT     1
 #define THROUGH 2
@@ -29,6 +30,9 @@ const char SERIAL_HIT     = 'h'; //当たった
 const char SERIAL_THROUGH = 't'; //モジュール通過
 const char SERIAL_POINT   = 'p'; //スコアアップ
 const char SERIAL_FINISH  = 'f'; //終了
+
+/* デバッグ用ハードウェアシリアル通信関係 */
+#define DEBUG_HSERIAL_BAUDRATE  9600  //ボーレート
 
 /* I2C関係 */
 /* スレーブのアドレス */
