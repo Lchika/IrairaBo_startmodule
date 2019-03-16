@@ -20,9 +20,11 @@
 /* D-sub通信関係 */
 #define INTERVAL_DSUB_COMM_MS   500   //スレーブに対してイベント発生状況を確認する間隔[ms]
 
-/* スタートモジュールの状態 */
-#define STATE_START   0 //開始待ち状態
-#define STATE_RUNNING 1 //ゲーム進行状態
-#define STATE_FINISH  2 //終了状態
+/* スタートモジュールの実行状態 */
+typedef enum _RUN_STATE_E{
+  STATE_WAIT_START = (0),  //開始待ち状態
+  STATE_IN_START_M,        //スタートモジュール通過中状態
+  STATE_IN_SLAVE_M,        //スレーブモジュール通過中状態
+} RUN_STATE_E;
 
 #endif //_START_MODULE_H_

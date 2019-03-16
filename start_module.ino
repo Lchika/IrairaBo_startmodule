@@ -46,34 +46,41 @@ void setup(void) {
  */
 void loop(void) {
   /* ループ処理内で使用する変数 */
-  static char state = STATE_START;  //  初期状態は開始待ち状態
+  static int state = STATE_WAIT_START;  //  初期状態は開始待ち状態
 
   switch(state) {
-    /* PCへSTARTメッセージを送り、返答を受け取ったらゲーム進行状態に遷移 */
-    case STATE_START:
+    /* PCへSTARTメッセージを送り、返答を受け取ったらスタートモジュール通過中状態に遷移 */
+    case STATE_WAIT_START:
       DebugPrint("STATE: START");
 
       serialCommunicator->send(SERIAL_START);
-      state = STATE_RUNNING;
+      state = STATE_IN_START_M;
       DebugPrint("STATE: RUNNING");
       break;
 
-    /* 終了条件を満たしたら終了状態へ遷移 */
-    case STATE_RUNNING:
+    /* スタートモジュール通過判定を検知したらスレーブモジュール通過中状態へ遷移 */
+    case STATE_IN_START_M:
       //  スタートモジュールの当たり判定処理
       if(digitalRead(PIN_HIT_START) == HIGH) {  //  HIT判定があるかどうか
+        //  PCにコース接触を通知
         serialCommunicator->send(SERIAL_HIT);
       }
 
       //  スタートモジュールゴール判定処理
       if(digitalRead(PIN_GOAL_START) == HIGH) { //  通過したかどうか
+        //  PCにモジュール通過を通知
         serialCommunicator->send(SERIAL_THROUGH);
+        //  D-sub通信を開始する(スレーブアドレス0x01指定)
         dsubMasterCommunicator->active(0x01);
+        //  スレーブモジュール通過中状態に遷移
+        state = STATE_IN_SLAVE_M;
       }
-
+      break;
+    
+    /* スレーブモジュールとの通信を定期的に行う */
+    case STATE_IN_SLAVE_M:
       //  Dsub関係イベント処理(これは定期的に呼ぶ必要がある)
       dsubMasterCommunicator->handle_dsub_event();
-
       break;
 
     default:
