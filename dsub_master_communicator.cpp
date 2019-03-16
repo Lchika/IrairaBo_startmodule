@@ -123,6 +123,12 @@ bool DsubMasterCommunicator::handle_dsub_event(void)
           DebugPrint("GOAL from slave_module");
           //  PCにモジュール通過を通知
           _serialCommunicator->send(SERIAL_THROUGH);
+          //  次のスレーブに通信開始を通知
+          Wire.beginTransmission(++_comm_slave_adress);
+          Wire.write(I2C_BEGIN_TRANS);
+          Wire.endTransmission();
+          sprintf(dprint_buff, "start i2c with SLAVE%d", _comm_slave_adress);
+          DebugPrint(dprint_buff);
         }
         break;
       default:
