@@ -77,11 +77,19 @@ bool DsubMasterCommunicator::get_active(void)
  */
 bool DsubMasterCommunicator::handle_dsub_event(void)
 {
+  static long last_handle_time = millis();  //  前回実行時間
   //DebugPrint("start");
   if(!(this->_active)){
     //  不活性状態の場合は何もしない
     return true;
   }
+  //  前回実行時間との差が設定インターバル時間より短い場合
+  if((millis() - last_handle_time) < _interval_comm_ms){
+    //  何もせず終了
+    return true;
+  }
+  //  前回実行時間を更新
+  last_handle_time = millis();
   Wire.requestFrom(_comm_slave_adress, I2C_DATA_SIZE);
   while(Wire.available()){
     byte massage = Wire.read();
