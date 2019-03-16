@@ -39,10 +39,15 @@ void setup(void) {
   DebugPrint("created dsubMasterCommunicator");
 }
 
-/*
-/* 状態遷移：開始待ち状態→ゲーム進行状態→終了状態
-/* 開始待ち状態→ゲーム進行状態：PCとのシリアル通信が成功したとき遷移
-/* ゲーム進行状態→終了状態：GOALに到達した(orX回当たったorタイムアップ等)とき遷移
+/**
+ * @brief ループ処理
+ * @param None
+ * @return None
+ * 
+ * @details
+ * 状態遷移
+ * - 開始待ち状態→スタートモジュール通過中状態→スレーブモジュール通過中状態
+ * 各状態に応じた処理を行う
  */
 void loop(void) {
   /* ループ処理内で使用する変数 */
