@@ -20,6 +20,7 @@ DsubMasterCommunicator::DsubMasterCommunicator(unsigned char slave_num,
   //  マスタとしてI2C通信開始
   Wire.begin();
   DebugPrint("I2C ready");
+  //  初期状態は不活性状態とする
   _active = false;
   DebugPrint("end");
 };
@@ -32,13 +33,16 @@ DsubMasterCommunicator::DsubMasterCommunicator(unsigned char slave_num,
 bool DsubMasterCommunicator::active(unsigned char slave_adress)
 {
   DebugPrint("start");
+  //  通信対象スレーブアドレスを記憶
   _comm_slave_adress = slave_adress;
   sprintf(dprint_buff, "start i2c with SLAVE%d", slave_adress);
   DebugPrint(dprint_buff);
+  //  通信対象スレーブに通信開始を通知
   Wire.beginTransmission(slave_adress);
   Wire.write(I2C_BEGIN_TRANS);
   Wire.endTransmission();
   DebugPrint("end i2c trans");
+  //  状態を活性状態に変更
   _active = true;
   DebugPrint("end")
   return true;
@@ -51,6 +55,7 @@ bool DsubMasterCommunicator::active(unsigned char slave_adress)
  */
 bool DsubMasterCommunicator::dis_active(void)
 {
+  //  状態を不活性状態に変更
   _active = false;
   return true;
 }
@@ -90,13 +95,17 @@ bool DsubMasterCommunicator::handle_dsub_event(void)
   }
   //  前回実行時間を更新
   last_handle_time = millis();
+  //  スレーブにイベント発生状況を確認
   Wire.requestFrom(_comm_slave_adress, I2C_DATA_SIZE);
+  //  スレーブからの返信を処理
   while(Wire.available()){
     byte massage = Wire.read();
+    //  返信内容によって処理を変える
     switch(massage){
       //  コース接触通知
       case I2C_DETECT_HIT:
         DebugPrint("got HIT");
+        //  PCにコース接触を通知
         _serialCommunicator->send(SERIAL_HIT);
         break;
       //  ゴール通知

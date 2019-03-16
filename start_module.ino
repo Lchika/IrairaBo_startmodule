@@ -9,13 +9,14 @@
 
 /* クラス・変数宣言 */
 unsigned char slave_num;    // スレーブの数(ゴールモジュールを含む)
-DsubMasterCommunicator *dsubMasterCommunicator = NULL;
-SerialCommunicator *serialCommunicator = NULL;
+DsubMasterCommunicator *dsubMasterCommunicator = NULL;    //  Dsub関係管理用
+SerialCommunicator *serialCommunicator = NULL;            //  シリアル通信管理用
 
 void setup(void) {
   BeginDebugPrint();
   DebugPrint("HardwareSerial ready");
 
+  //  シリアル通信管理クラスのインスタンスを生成
   serialCommunicator = new SerialCommunicator(PIN_RX, PIN_TX, PC_SSERIAL_BAUDRATE);
   DebugPrint("SoftwareSerial ready");
 
@@ -29,7 +30,10 @@ void setup(void) {
   pinMode(PIN_DIP_3, INPUT);
   DebugPrint("pinMode set end");
 
+  //  接続スレーブ数を確認
   slave_num = ReadDipSwitch();
+
+  //  Dsub関係管理クラスのインスタンスを生成
   dsubMasterCommunicator = new DsubMasterCommunicator(slave_num,
                             serialCommunicator, INTERVAL_DSUB_COMM_MS);
   DebugPrint("created dsubMasterCommunicator");
@@ -56,16 +60,18 @@ void loop(void) {
 
     /* 終了条件を満たしたら終了状態へ遷移 */
     case STATE_RUNNING:
-      //スタートモジュールの当たり判定処理
-      if(digitalRead(PIN_HIT_START) == HIGH) {  //HIT判定があるかどうか
+      //  スタートモジュールの当たり判定処理
+      if(digitalRead(PIN_HIT_START) == HIGH) {  //  HIT判定があるかどうか
         serialCommunicator->send(SERIAL_HIT);
       }
 
-      if(digitalRead(PIN_GOAL_START) == HIGH) { //通過したかどうか
+      //  スタートモジュールゴール判定処理
+      if(digitalRead(PIN_GOAL_START) == HIGH) { //  通過したかどうか
         serialCommunicator->send(SERIAL_THROUGH);
         dsubMasterCommunicator->active(0x01);
       }
 
+      //  Dsub関係イベント処理(これは定期的に呼ぶ必要がある)
       dsubMasterCommunicator->handle_dsub_event();
 
       break;

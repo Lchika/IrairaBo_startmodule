@@ -18,7 +18,7 @@
 #define PC_SSERIAL_BAUDRATE     9600  //ボーレート
 
 /* D-sub通信関係 */
-#define INTERVAL_DSUB_COMM_MS   500
+#define INTERVAL_DSUB_COMM_MS   500   //スレーブに対してイベント発生状況を確認する間隔[ms]
 
 /* スタートモジュールの状態 */
 #define STATE_START   0 //開始待ち状態
