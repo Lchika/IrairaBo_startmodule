@@ -42,13 +42,18 @@
 - 詳細仕様
   - 上記(1)についてはシンプル
     - 図示すると以下のような流れ
-      ![](https://github.com/Lchika/IrairaBo_startmodule/blob/master/pic/iraira_i2c_1.png)
+
+      <img src="https://github.com/Lchika/IrairaBo_startmodule/blob/master/pic/iraira_i2c_1.png" width="400px">
+
   - 上記(2)についてはスレーブ→マスタへの通知になるため処理の流れが少し複雑になる
     - 本来以下のような流れにできれば(1)同様シンプルになる
-      ![](https://github.com/Lchika/IrairaBo_startmodule/blob/master/pic/iraira_i2c_2.png)
+
+      <img src="https://github.com/Lchika/IrairaBo_startmodule/blob/master/pic/iraira_i2c_2.png" width="400px">
+
     - が、I2Cではスレーブからマスタに自発的に通信することはできない
     - そこで、以下のように実装した
-      ![](https://github.com/Lchika/IrairaBo_startmodule/blob/master/pic/iraira_i2c_3.png)
+
+      <img src="https://github.com/Lchika/IrairaBo_startmodule/blob/master/pic/iraira_i2c_3.png" width="400px">
 
 ## 処理の流れ
 
