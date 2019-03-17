@@ -33,6 +33,23 @@
 - ただし、上記対応により各モジュールの通過判定が必須になった
   - どのモジュールと通信すればよいかわからないとI2C通信できないため
 
+## I2C関係
+
+- I2Cの通信内容は以下の通り
+  - マスタからスレーブへ通信開始を通知する(1)
+  - マスタからスレーブへコース接触、モジュール通過イベントの発生通知を要求する(2)
+
+- 詳細仕様
+  - 上記(1)についてはシンプル
+    - 図示すると以下のような流れ
+      ![](https://github.com/Lchika/IrairaBo_startmodule/blob/master/pic/iraira_i2c_1.png)
+  - 上記(2)についてはスレーブ→マスタへの通知になるため処理の流れが少し複雑になる
+    - 本来以下のような流れにできれば(1)同様シンプルになる
+      ![](https://github.com/Lchika/IrairaBo_startmodule/blob/master/pic/iraira_i2c_2.png)
+    - が、I2Cではスレーブからマスタに自発的に通信することはできない
+    - そこで、以下のように実装した
+      ![](https://github.com/Lchika/IrairaBo_startmodule/blob/master/pic/iraira_i2c_3.png)
+
 ## 処理の流れ
 
 1. スタート待機状態  
