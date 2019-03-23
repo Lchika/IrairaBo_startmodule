@@ -1,4 +1,4 @@
-/* start_module.ino */
+/**@file start_module.ino */
 /* スタートモジュール  */
 
 #include "start_module.h"

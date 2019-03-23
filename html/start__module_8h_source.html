@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.15"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>start_module: start_module.h ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">start_module
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.15 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">start_module.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="start__module_8h.html">[詳解]</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/* start_define.h            */</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">/* スタートモジュール関係のヘッダ */</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef _START_MODULE_H_</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define _START_MODULE_H_</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">/* Arduino のピン定義 */</span></div><div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="start__module_8h.html#af0fd707a71a515d10e4d3d22e3ef1fd8">    8</a></span>&#160;<span class="preprocessor">#define PIN_GOAL_START      12  //ゴール判定ピン(スタートモジュール)</span></div><div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="start__module_8h.html#af2e4043058c506e12d033c848768c67d">    9</a></span>&#160;<span class="preprocessor">#define PIN_HIT_START       3   //当たった判定ピン(スタートモジュール)</span></div><div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="start__module_8h.html#a6d36ce8ebfa0d2226caa366a98db3020">   10</a></span>&#160;<span class="preprocessor">#define PIN_RX              10  //ソフトウェアシリアルRX</span></div><div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="start__module_8h.html#a44248c1cb3175c7bb62c0ebe92c1a0c0">   11</a></span>&#160;<span class="preprocessor">#define PIN_TX              11  //ソフトウェアシリアルTX</span></div><div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="start__module_8h.html#a1865ea46eaf057c61c9661e6777e617b">   12</a></span>&#160;<span class="preprocessor">#define PIN_DIP_0           6   //DIPスイッチbit0</span></div><div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="start__module_8h.html#aad6f8823636ffe5bee61d57219a18f53">   13</a></span>&#160;<span class="preprocessor">#define PIN_DIP_1           7   //DIPスイッチbit1</span></div><div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="start__module_8h.html#af0b38ba5f8b9c96b3a1f03b00382739c">   14</a></span>&#160;<span class="preprocessor">#define PIN_DIP_2           8   //DIPスイッチbit2</span></div><div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="start__module_8h.html#a2d393a9dffb71739bd6aa98a0eb94e76">   15</a></span>&#160;<span class="preprocessor">#define PIN_DIP_3           9   //DIPスイッチbit3</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/* PC とのソフトウェアシリアル通信関係 */</span></div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="start__module_8h.html#a6c7e9635de3e6ebaa760997f1f284030">   18</a></span>&#160;<span class="preprocessor">#define PC_SSERIAL_BAUDRATE     9600  //ボーレート</span></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">/* D-sub通信関係 */</span></div><div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="start__module_8h.html#a69b3c7b7b26ddd07920ca72c15633067">   21</a></span>&#160;<span class="preprocessor">#define INTERVAL_DSUB_COMM_MS   500   //スレーブに対してイベント発生状況を確認する間隔[ms]</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/* スタートモジュールの実行状態 */</span></div><div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="start__module_8h.html#a879ec90cdab669bd599fad600f5d7529">   24</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> <a class="code" href="start__module_8h.html#a879ec90cdab669bd599fad600f5d7529">_RUN_STATE_E</a>{</div><div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="start__module_8h.html#a879ec90cdab669bd599fad600f5d7529ae728a72a38e4025ac268366df9df7246">   25</a></span>&#160;  <a class="code" href="start__module_8h.html#a879ec90cdab669bd599fad600f5d7529ae728a72a38e4025ac268366df9df7246">STATE_WAIT_START</a> = (0),  <span class="comment">//開始待ち状態</span></div><div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="start__module_8h.html#a879ec90cdab669bd599fad600f5d7529aab019e6de5de6f63cb0daee8efa13c59">   26</a></span>&#160;  <a class="code" href="start__module_8h.html#a879ec90cdab669bd599fad600f5d7529aab019e6de5de6f63cb0daee8efa13c59">STATE_IN_START_M</a>,        <span class="comment">//スタートモジュール通過中状態</span></div><div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="start__module_8h.html#a879ec90cdab669bd599fad600f5d7529a530b235af4779e4e0dae7bae5591dd32">   27</a></span>&#160;  <a class="code" href="start__module_8h.html#a879ec90cdab669bd599fad600f5d7529a530b235af4779e4e0dae7bae5591dd32">STATE_IN_SLAVE_M</a>,        <span class="comment">//スレーブモジュール通過中状態</span></div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;} <a class="code" href="start__module_8h.html#a6b676d7ffe83b353342cd0c59b6e4b4a">RUN_STATE_E</a>;</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#endif //_START_MODULE_H_</span></div><div class="ttc" id="start__module_8h_html_a6b676d7ffe83b353342cd0c59b6e4b4a"><div class="ttname"><a href="start__module_8h.html#a6b676d7ffe83b353342cd0c59b6e4b4a">RUN_STATE_E</a></div><div class="ttdeci">enum _RUN_STATE_E RUN_STATE_E</div></div>
+<div class="ttc" id="start__module_8h_html_a879ec90cdab669bd599fad600f5d7529ae728a72a38e4025ac268366df9df7246"><div class="ttname"><a href="start__module_8h.html#a879ec90cdab669bd599fad600f5d7529ae728a72a38e4025ac268366df9df7246">STATE_WAIT_START</a></div><div class="ttdef"><b>Definition:</b> start_module.h:25</div></div>
+<div class="ttc" id="start__module_8h_html_a879ec90cdab669bd599fad600f5d7529"><div class="ttname"><a href="start__module_8h.html#a879ec90cdab669bd599fad600f5d7529">_RUN_STATE_E</a></div><div class="ttdeci">_RUN_STATE_E</div><div class="ttdef"><b>Definition:</b> start_module.h:24</div></div>
+<div class="ttc" id="start__module_8h_html_a879ec90cdab669bd599fad600f5d7529a530b235af4779e4e0dae7bae5591dd32"><div class="ttname"><a href="start__module_8h.html#a879ec90cdab669bd599fad600f5d7529a530b235af4779e4e0dae7bae5591dd32">STATE_IN_SLAVE_M</a></div><div class="ttdef"><b>Definition:</b> start_module.h:27</div></div>
+<div class="ttc" id="start__module_8h_html_a879ec90cdab669bd599fad600f5d7529aab019e6de5de6f63cb0daee8efa13c59"><div class="ttname"><a href="start__module_8h.html#a879ec90cdab669bd599fad600f5d7529aab019e6de5de6f63cb0daee8efa13c59">STATE_IN_START_M</a></div><div class="ttdef"><b>Definition:</b> start_module.h:26</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築: &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.15
+</small></address>
+</body>
+</html>

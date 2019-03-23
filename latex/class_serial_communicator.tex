@@ -1,0 +1,97 @@
+\hypertarget{class_serial_communicator}{}\section{Serial\+Communicator クラス}
+\label{class_serial_communicator}\index{SerialCommunicator@{SerialCommunicator}}
+
+
+シリアル通信を管理するクラス  
+
+
+
+
+{\ttfamily \#include $<$serial\+\_\+communicator.\+hpp$>$}
+
+\subsection*{公開メンバ関数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_serial_communicator_ac3f793f4b7e9624915921f5c6922159b}{Serial\+Communicator}} (int pin\+\_\+rx, int pin\+\_\+tx, int baudrate)
+\item 
+\mbox{\hyperlink{class_serial_communicator_a591630c3e832911a8054658e21d3be5a}{$\sim$\+Serial\+Communicator}} (void)
+\begin{DoxyCompactList}\small\item\em デストラクタ \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_serial_communicator_add5f2442d225ecc542f4b8c58a970281}{send}} (char massage)
+\begin{DoxyCompactList}\small\item\em 送信処理 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{詳解}
+シリアル通信を管理するクラス 
+
+\subsection{構築子と解体子}
+\mbox{\Hypertarget{class_serial_communicator_ac3f793f4b7e9624915921f5c6922159b}\label{class_serial_communicator_ac3f793f4b7e9624915921f5c6922159b}} 
+\index{SerialCommunicator@{SerialCommunicator}!SerialCommunicator@{SerialCommunicator}}
+\index{SerialCommunicator@{SerialCommunicator}!SerialCommunicator@{SerialCommunicator}}
+\subsubsection{\texorpdfstring{SerialCommunicator()}{SerialCommunicator()}}
+{\footnotesize\ttfamily Serial\+Communicator\+::\+Serial\+Communicator (\begin{DoxyParamCaption}\item[{int}]{pin\+\_\+rx,  }\item[{int}]{pin\+\_\+tx,  }\item[{int}]{baudrate }\end{DoxyParamCaption})}
+
+@bried コンストラクタ 
+\begin{DoxyParams}[1]{引数}
+\mbox{\texttt{ in}}  & {\em pin\+\_\+rx} & R\+Xピン \\
+\hline
+\mbox{\texttt{ in}}  & {\em pin\+\_\+tx} & T\+Xピン \\
+\hline
+\mbox{\texttt{ in}}  & {\em baudrate} & ボーレート \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{戻り値}
+None 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_serial_communicator_a591630c3e832911a8054658e21d3be5a}\label{class_serial_communicator_a591630c3e832911a8054658e21d3be5a}} 
+\index{SerialCommunicator@{SerialCommunicator}!````~SerialCommunicator@{$\sim$SerialCommunicator}}
+\index{````~SerialCommunicator@{$\sim$SerialCommunicator}!SerialCommunicator@{SerialCommunicator}}
+\subsubsection{\texorpdfstring{$\sim$SerialCommunicator()}{~SerialCommunicator()}}
+{\footnotesize\ttfamily Serial\+Communicator\+::$\sim$\+Serial\+Communicator (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+デストラクタ 
+
+
+\begin{DoxyParams}{引数}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{戻り値}
+None 
+\end{DoxyReturn}
+
+
+\subsection{関数詳解}
+\mbox{\Hypertarget{class_serial_communicator_add5f2442d225ecc542f4b8c58a970281}\label{class_serial_communicator_add5f2442d225ecc542f4b8c58a970281}} 
+\index{SerialCommunicator@{SerialCommunicator}!send@{send}}
+\index{send@{send}!SerialCommunicator@{SerialCommunicator}}
+\subsubsection{\texorpdfstring{send()}{send()}}
+{\footnotesize\ttfamily bool Serial\+Communicator\+::send (\begin{DoxyParamCaption}\item[{char}]{massage }\end{DoxyParamCaption})}
+
+
+
+送信処理 
+
+
+\begin{DoxyParams}[1]{引数}
+\mbox{\texttt{ in}}  & {\em massage} & 送信メッセージ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{戻り値}
+bool true\+:エラーなし, false\+:エラーあり 
+\end{DoxyReturn}
+被呼び出し関係図\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_serial_communicator_add5f2442d225ecc542f4b8c58a970281_icgraph}
+\end{center}
+\end{figure}
+
+
+このクラス詳解は次のファイルから抽出されました\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{serial__communicator_8hpp}{serial\+\_\+communicator.\+hpp}}\item 
+\mbox{\hyperlink{serial__communicator_8cpp}{serial\+\_\+communicator.\+cpp}}\end{DoxyCompactItemize}

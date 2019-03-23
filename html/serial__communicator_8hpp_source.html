@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.15"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>start_module: serial_communicator.hpp ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">start_module
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.15 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">serial_communicator.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="serial__communicator_8hpp.html">[詳解]</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef SERIAL_COMMUNICATOR_H</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define SERIAL_COMMUNICATOR_H</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;SoftwareSerial.h&gt;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div><div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_serial_communicator.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_serial_communicator.html">SerialCommunicator</a> {</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">private</span>:</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;  SoftwareSerial *serial = NULL;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;  <span class="keywordtype">char</span> dprint_buff[128];</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <a class="code" href="class_serial_communicator.html#ac3f793f4b7e9624915921f5c6922159b">SerialCommunicator</a>(<span class="keywordtype">int</span> pin_rx, <span class="keywordtype">int</span> pin_tx, <span class="keywordtype">int</span> baudrate);</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;  <a class="code" href="class_serial_communicator.html#a591630c3e832911a8054658e21d3be5a">~SerialCommunicator</a>(<span class="keywordtype">void</span>);</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="class_serial_communicator.html#add5f2442d225ecc542f4b8c58a970281">send</a>(<span class="keywordtype">char</span> massage);</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="class_serial_communicator_html_a591630c3e832911a8054658e21d3be5a"><div class="ttname"><a href="class_serial_communicator.html#a591630c3e832911a8054658e21d3be5a">SerialCommunicator::~SerialCommunicator</a></div><div class="ttdeci">~SerialCommunicator(void)</div><div class="ttdoc">デストラクタ</div><div class="ttdef"><b>Definition:</b> serial_communicator.cpp:27</div></div>
+<div class="ttc" id="class_serial_communicator_html"><div class="ttname"><a href="class_serial_communicator.html">SerialCommunicator</a></div><div class="ttdoc">シリアル通信を管理するクラス</div><div class="ttdef"><b>Definition:</b> serial_communicator.hpp:10</div></div>
+<div class="ttc" id="class_serial_communicator_html_ac3f793f4b7e9624915921f5c6922159b"><div class="ttname"><a href="class_serial_communicator.html#ac3f793f4b7e9624915921f5c6922159b">SerialCommunicator::SerialCommunicator</a></div><div class="ttdeci">SerialCommunicator(int pin_rx, int pin_tx, int baudrate)</div><div class="ttdef"><b>Definition:</b> serial_communicator.cpp:12</div></div>
+<div class="ttc" id="class_serial_communicator_html_add5f2442d225ecc542f4b8c58a970281"><div class="ttname"><a href="class_serial_communicator.html#add5f2442d225ecc542f4b8c58a970281">SerialCommunicator::send</a></div><div class="ttdeci">bool send(char massage)</div><div class="ttdoc">送信処理</div><div class="ttdef"><b>Definition:</b> serial_communicator.cpp:41</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築: &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.15
+</small></address>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<map id="SerialCommunicator::send" name="SerialCommunicator::send">
+<area shape="rect" id="node1" title="送信処理" alt="" coords="324,35,463,76"/>
+<area shape="rect" id="node2" href="$class_dsub_master_communicator.html#a91a5a356d0aa58a30f3381522cd7616f" title="D&#45;sub関係イベント処理関数" alt="" coords="100,5,276,47"/>
+<area shape="rect" id="node3" href="$start__module_8ino.html#a0b33edabd7f1c4e4a0bf32c67269be2f" title="ループ処理" alt="" coords="5,42,52,69"/>
+</map>

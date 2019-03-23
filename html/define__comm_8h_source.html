@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.15"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>start_module: define_comm.h ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">start_module
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 構築: Doxygen 1.8.15 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'検索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','検索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">define_comm.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="define__comm_8h.html">[詳解]</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">//  通信関係define定義</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#ifndef DEFINE_COMM_H</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define DEFINE_COMM_H</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//  スレーブへ送信/受信する情報</span></div><div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="define__comm_8h.html#ac4dcd24b629f9d95bc057aa564d16fa8">    7</a></span>&#160;<span class="preprocessor">#define I2C_BEGIN_TRANS   0   //  通信を開始すること</span></div><div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="define__comm_8h.html#a9b9e28487e623d58036461c46ebebeec">    8</a></span>&#160;<span class="preprocessor">#define I2C_DETECT_HIT    1   //  HITを検知したこと</span></div><div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="define__comm_8h.html#adfb9e76bbb3d8fb0c571c41c7f5021d3">    9</a></span>&#160;<span class="preprocessor">#define I2C_DETECT_GOAL   2   //  通過/ゴールを検知したこと</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">//  PCへ送信する情報</span></div><div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="define__comm_8h.html#a9afbd722eceaab7ba3eec2a42915bf57">   12</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="define__comm_8h.html#a9afbd722eceaab7ba3eec2a42915bf57">SERIAL_START</a>   = <span class="charliteral">&#39;s&#39;</span>;  <span class="comment">//  開始</span></div><div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="define__comm_8h.html#a31718d1b7cddfe51856aa6180e052233">   13</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="define__comm_8h.html#a31718d1b7cddfe51856aa6180e052233">SERIAL_HIT</a>     = <span class="charliteral">&#39;h&#39;</span>;  <span class="comment">//  当たった</span></div><div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="define__comm_8h.html#af1e801f13504c69d434509326beabc8f">   14</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="define__comm_8h.html#af1e801f13504c69d434509326beabc8f">SERIAL_THROUGH</a> = <span class="charliteral">&#39;t&#39;</span>;  <span class="comment">//  モジュール通過</span></div><div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="define__comm_8h.html#aba3035eabde5558dd524f38d9f6861d1">   15</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="define__comm_8h.html#aba3035eabde5558dd524f38d9f6861d1">SERIAL_POINT</a>   = <span class="charliteral">&#39;p&#39;</span>;  <span class="comment">//  スコアアップ</span></div><div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="define__comm_8h.html#af073701dbcdf9c7e7ff2cd3bdb999dda">   16</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="define__comm_8h.html#af073701dbcdf9c7e7ff2cd3bdb999dda">SERIAL_FINISH</a>  = <span class="charliteral">&#39;f&#39;</span>;  <span class="comment">//  終了</span></div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif //DEFINE_COMM_H</span></div><div class="ttc" id="define__comm_8h_html_aba3035eabde5558dd524f38d9f6861d1"><div class="ttname"><a href="define__comm_8h.html#aba3035eabde5558dd524f38d9f6861d1">SERIAL_POINT</a></div><div class="ttdeci">const char SERIAL_POINT</div><div class="ttdef"><b>Definition:</b> define_comm.h:15</div></div>
+<div class="ttc" id="define__comm_8h_html_a31718d1b7cddfe51856aa6180e052233"><div class="ttname"><a href="define__comm_8h.html#a31718d1b7cddfe51856aa6180e052233">SERIAL_HIT</a></div><div class="ttdeci">const char SERIAL_HIT</div><div class="ttdef"><b>Definition:</b> define_comm.h:13</div></div>
+<div class="ttc" id="define__comm_8h_html_af073701dbcdf9c7e7ff2cd3bdb999dda"><div class="ttname"><a href="define__comm_8h.html#af073701dbcdf9c7e7ff2cd3bdb999dda">SERIAL_FINISH</a></div><div class="ttdeci">const char SERIAL_FINISH</div><div class="ttdef"><b>Definition:</b> define_comm.h:16</div></div>
+<div class="ttc" id="define__comm_8h_html_af1e801f13504c69d434509326beabc8f"><div class="ttname"><a href="define__comm_8h.html#af1e801f13504c69d434509326beabc8f">SERIAL_THROUGH</a></div><div class="ttdeci">const char SERIAL_THROUGH</div><div class="ttdef"><b>Definition:</b> define_comm.h:14</div></div>
+<div class="ttc" id="define__comm_8h_html_a9afbd722eceaab7ba3eec2a42915bf57"><div class="ttname"><a href="define__comm_8h.html#a9afbd722eceaab7ba3eec2a42915bf57">SERIAL_START</a></div><div class="ttdeci">const char SERIAL_START</div><div class="ttdef"><b>Definition:</b> define_comm.h:12</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+構築: &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.15
+</small></address>
+</body>
+</html>

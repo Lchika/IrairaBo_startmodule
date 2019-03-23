@@ -1,0 +1,114 @@
+\hypertarget{start__module_8ino}{}\section{start\+\_\+module.\+ino ファイル}
+\label{start__module_8ino}\index{start\_module.ino@{start\_module.ino}}
+{\ttfamily \#include \char`\"{}start\+\_\+module.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}define\+\_\+comm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}dsub\+\_\+master\+\_\+communicator.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}debug.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+start\+\_\+module.\+ino の依存先関係図\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{start__module_8ino__incl}
+\end{center}
+\end{figure}
+\subsection*{関数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{start__module_8ino_a7dfd9b79bc5a37d7df40207afbc5431f}{setup}} (void)
+\item 
+void \mbox{\hyperlink{start__module_8ino_a0b33edabd7f1c4e4a0bf32c67269be2f}{loop}} (void)
+\begin{DoxyCompactList}\small\item\em ループ処理 \end{DoxyCompactList}\item 
+unsigned char \mbox{\hyperlink{start__module_8ino_a77b0a767d95108a48a54b857588d2863}{Read\+Dip\+Switch}} (void)
+\end{DoxyCompactItemize}
+\subsection*{変数}
+\begin{DoxyCompactItemize}
+\item 
+unsigned char \mbox{\hyperlink{start__module_8ino_a74d30eb4a8cad665a32a15dbee48837f}{slave\+\_\+num}}
+\item 
+\mbox{\hyperlink{class_dsub_master_communicator}{Dsub\+Master\+Communicator}} $\ast$ \mbox{\hyperlink{start__module_8ino_af3e70438e0875f19cc1cb4cb9f522f80}{dsub\+Master\+Communicator}} = N\+U\+LL
+\item 
+\mbox{\hyperlink{class_serial_communicator}{Serial\+Communicator}} $\ast$ \mbox{\hyperlink{start__module_8ino_a432be7f3eee18ba7ccdf2ab1d8908ae1}{serial\+Communicator}} = N\+U\+LL
+\end{DoxyCompactItemize}
+
+
+\subsection{関数詳解}
+\mbox{\Hypertarget{start__module_8ino_a0b33edabd7f1c4e4a0bf32c67269be2f}\label{start__module_8ino_a0b33edabd7f1c4e4a0bf32c67269be2f}} 
+\index{start\_module.ino@{start\_module.ino}!loop@{loop}}
+\index{loop@{loop}!start\_module.ino@{start\_module.ino}}
+\subsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+ループ処理 
+
+
+\begin{DoxyParams}{引数}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{戻り値}
+None
+\end{DoxyReturn}
+状態遷移
+\begin{DoxyItemize}
+\item 開始待ち状態→スタートモジュール通過中状態→スレーブモジュール通過中状態 各状態に応じた処理を行う 
+\end{DoxyItemize}呼び出し関係図\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{start__module_8ino_a0b33edabd7f1c4e4a0bf32c67269be2f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{start__module_8ino_a77b0a767d95108a48a54b857588d2863}\label{start__module_8ino_a77b0a767d95108a48a54b857588d2863}} 
+\index{start\_module.ino@{start\_module.ino}!ReadDipSwitch@{ReadDipSwitch}}
+\index{ReadDipSwitch@{ReadDipSwitch}!start\_module.ino@{start\_module.ino}}
+\subsubsection{\texorpdfstring{ReadDipSwitch()}{ReadDipSwitch()}}
+{\footnotesize\ttfamily unsigned char Read\+Dip\+Switch (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+被呼び出し関係図\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{start__module_8ino_a77b0a767d95108a48a54b857588d2863_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{start__module_8ino_a7dfd9b79bc5a37d7df40207afbc5431f}\label{start__module_8ino_a7dfd9b79bc5a37d7df40207afbc5431f}} 
+\index{start\_module.ino@{start\_module.ino}!setup@{setup}}
+\index{setup@{setup}!start\_module.ino@{start\_module.ino}}
+\subsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+呼び出し関係図\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{start__module_8ino_a7dfd9b79bc5a37d7df40207afbc5431f_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{変数詳解}
+\mbox{\Hypertarget{start__module_8ino_af3e70438e0875f19cc1cb4cb9f522f80}\label{start__module_8ino_af3e70438e0875f19cc1cb4cb9f522f80}} 
+\index{start\_module.ino@{start\_module.ino}!dsubMasterCommunicator@{dsubMasterCommunicator}}
+\index{dsubMasterCommunicator@{dsubMasterCommunicator}!start\_module.ino@{start\_module.ino}}
+\subsubsection{\texorpdfstring{dsubMasterCommunicator}{dsubMasterCommunicator}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_dsub_master_communicator}{Dsub\+Master\+Communicator}}$\ast$ dsub\+Master\+Communicator = N\+U\+LL}
+
+\mbox{\Hypertarget{start__module_8ino_a432be7f3eee18ba7ccdf2ab1d8908ae1}\label{start__module_8ino_a432be7f3eee18ba7ccdf2ab1d8908ae1}} 
+\index{start\_module.ino@{start\_module.ino}!serialCommunicator@{serialCommunicator}}
+\index{serialCommunicator@{serialCommunicator}!start\_module.ino@{start\_module.ino}}
+\subsubsection{\texorpdfstring{serialCommunicator}{serialCommunicator}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_serial_communicator}{Serial\+Communicator}}$\ast$ serial\+Communicator = N\+U\+LL}
+
+\mbox{\Hypertarget{start__module_8ino_a74d30eb4a8cad665a32a15dbee48837f}\label{start__module_8ino_a74d30eb4a8cad665a32a15dbee48837f}} 
+\index{start\_module.ino@{start\_module.ino}!slave\_num@{slave\_num}}
+\index{slave\_num@{slave\_num}!start\_module.ino@{start\_module.ino}}
+\subsubsection{\texorpdfstring{slave\_num}{slave\_num}}
+{\footnotesize\ttfamily unsigned char slave\+\_\+num}
+

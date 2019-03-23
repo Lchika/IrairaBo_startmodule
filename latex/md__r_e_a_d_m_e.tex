@@ -1,0 +1,123 @@
+\subsection*{概要}
+
+
+\begin{DoxyItemize}
+\item スタートモジュール用の\+Arduinoコード
+\end{DoxyItemize}
+
+\subsection*{ピン関係}
+
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ ピン番号  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 役割   }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ ピン番号  }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ 役割   }\\\cline{1-2}
+\endhead
+3  &スタートモジュールのコース接触判定   \\\cline{1-2}
+6  &D\+I\+Pスイッチbit0   \\\cline{1-2}
+7  &D\+I\+Pスイッチbit1   \\\cline{1-2}
+8  &D\+I\+Pスイッチbit2   \\\cline{1-2}
+9  &D\+I\+Pスイッチbit3   \\\cline{1-2}
+10  &P\+C通信用ソフトウェアシリアル\+RX   \\\cline{1-2}
+11  &P\+C通信用ソフトウェアシリアル\+TX   \\\cline{1-2}
+12  &スタートモジュールのコース通過判定   \\\cline{1-2}
+A4(18)  &D-\/sub2番ピン(S\+DA)   \\\cline{1-2}
+A5(19)  &D-\/sub3番ピン(S\+CL)   \\\cline{1-2}
+G\+ND  &D-\/sub1番ピン   \\\cline{1-2}
+\end{longtabu}
+
+
+
+\begin{DoxyItemize}
+\item 上記ピン番号について\+D-\/sub関係以外は仮決め
+\begin{DoxyItemize}
+\item というかコース接触判定・ゴール判定のピンを1個しか割り当ていないが、判定に複数ピンを使いたい場合もあるだろう…
+\item そのときはコード修正必要
+\end{DoxyItemize}
+\item I2\+C関係ピンは固定
+\item ソフトウェアシリアルのピン番号(\+R\+X, T\+X)はいくらでも変更可能
+\end{DoxyItemize}
+
+\subsection*{D-\/sub関係}
+
+
+\begin{DoxyItemize}
+\item スレーブのアドレス指定：スタートモジュールに近い順に1,2,3...
+\item D-\/sub関係は\+I2C(2,3番ピン)のみに集約し、\+D-\/subの4,5番ピン(ゴール通知・コース接触通知)は不要となった
+\item ただし、上記対応により各モジュールの通過判定が必須になった
+\begin{DoxyItemize}
+\item どのモジュールと通信すればよいかわからないと\+I2\+C通信できないため
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\subsection*{I2\+C関係}
+
+
+\begin{DoxyItemize}
+\item I2\+Cの通信内容は以下の通り
+\begin{DoxyItemize}
+\item マスタからスレーブへ通信開始を通知する(1)
+\item マスタからスレーブへコース接触、モジュール通過イベントの発生通知を要求する(2)
+\end{DoxyItemize}
+\item 詳細仕様
+\begin{DoxyItemize}
+\item 上記(1)についてはシンプル
+\begin{DoxyItemize}
+\item 図示すると以下のような流れ
+
+
+\end{DoxyItemize}
+\item 上記(2)についてはスレーブ→マスタへの通知になるため処理の流れが少し複雑になる
+\begin{DoxyItemize}
+\item 本来以下のような流れにできれば(1)同様シンプルになる
+
+
+\item が、\+I2\+Cではスレーブからマスタに自発的に通信することはできない
+\item そこで、以下のように実装した
+
+
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\subsection*{処理の流れ}
+
+
+\begin{DoxyEnumerate}
+\item スタート待機状態
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item P\+Cにスタートメッセージ(\textquotesingle{}s\textquotesingle{})を投げる
+\item そのまま\+P\+Cから\textquotesingle{}s\textquotesingle{}が返ってきたら 2. スタートモジュール通過中状態 に遷移する
+\item …ように今は実装してあるが、スタート検知できるようにするなら、以下のような変更が必要
+\begin{DoxyItemize}
+\item スタート検知したら 2. スタートモジュール通過中状態 に遷移するようにする
+\end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item スタートモジュール通過中状態
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item コース接触を検知した場合
+\begin{DoxyItemize}
+\item P\+Cへ当たった判定メッセージ(\textquotesingle{}h\textquotesingle{})を投げる
+\item そのまま\+P\+Cから\textquotesingle{}h\textquotesingle{}が返ってくるまで待機
+\end{DoxyItemize}
+\item モジュール通過を検知した場合
+\begin{DoxyItemize}
+\item P\+Cへ通過/ゴール判定メッセージ(\textquotesingle{}t\textquotesingle{})を投げる
+\item そのまま\+P\+Cから\textquotesingle{}t\textquotesingle{}が返ってきたらスレーブ1との通信を開始し、 3. スレーブモジュール通過中状態 に遷移する
+\end{DoxyItemize}
+\end{DoxyItemize}
+\begin{DoxyEnumerate}
+\item スレーブモジュール通過中状態
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item 一定時間ごとにスレーブモジュールの状態を確認する
+\item スレーブモジュールの状態に応じて必要であれば\+P\+Cと通信を行う
+\item 通信対象モジュールの切り替えも\+Dsub関係管理クラスの{\ttfamily handle\+\_\+dsub\+\_\+event()}の中で行われる 
+\end{DoxyItemize}
