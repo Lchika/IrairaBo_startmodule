@@ -26,19 +26,57 @@ DsubMasterCommunicator::DsubMasterCommunicator(unsigned char slave_num,
 };
 
 /**
+ * @brief スレーブ接続確認処理
+ * @param None
+ * @return bool true:すべて正常、false:接続できていないスレーブがある(スレーブ番号はデバッグ出力で確認可能)
+ */
+bool DsubMasterCommunicator::confirm_connect(void)
+{
+  //  戻り値用の変数
+  bool is_slaves_valid = true;
+
+  //  全スレーブに対して疎通確認メッセージを送る
+  for(int slave_address = 1; slave_address <= _slave_num; slave_address++){
+    //  疎通確認メッセージを送る
+    Wire.beginTransmission(slave_address);
+    Wire.write(I2C_CHECK_CONNECT);
+    Wire.endTransmission();
+
+    //  スレーブ側の処理を待つ
+    delay(100);
+
+    //  疎通確認メッセージが届いているかスレーブに問い合わせる
+    bool is_vaild = false;
+    Wire.requestFrom(slave_address, 1);
+    while(Wire.available()){
+      if(Wire.read() == I2C_BEGIN_TRANS){
+        is_vaild = true;
+      }
+    }
+    if(!is_vaild){
+      sprintf(dprint_buff, "<ERROR> found invalid slave! (%d)", slave_address);
+      DebugPrint(dprint_buff);
+      is_slaves_valid = false;
+    }
+  }
+
+  return is_slaves_valid;
+}
+
+/**
  * @brief 活性化処理
  * @param None
  * @return None
  */
-bool DsubMasterCommunicator::active(unsigned char slave_adress)
+bool DsubMasterCommunicator::active(unsigned char slave_address)
 {
   DebugPrint("start");
   //  通信対象スレーブアドレスを記憶
-  _comm_slave_adress = slave_adress;
-  sprintf(dprint_buff, "start i2c with SLAVE%d", slave_adress);
+  _comm_slave_address = slave_address;
+  sprintf(dprint_buff, "start i2c with SLAVE%d", slave_address);
   DebugPrint(dprint_buff);
   //  通信対象スレーブに通信開始を通知
-  Wire.beginTransmission(slave_adress);
+  Wire.beginTransmission(slave_address);
   Wire.write(I2C_BEGIN_TRANS);
   Wire.endTransmission();
   DebugPrint("end i2c trans");
@@ -96,7 +134,7 @@ bool DsubMasterCommunicator::handle_dsub_event(void)
   //  前回実行時間を更新
   last_handle_time = millis();
   //  スレーブにイベント発生状況を確認
-  Wire.requestFrom(_comm_slave_adress, I2C_DATA_SIZE);
+  Wire.requestFrom(_comm_slave_address, I2C_DATA_SIZE);
   //  スレーブからの返信を処理
   while(Wire.available()){
     byte massage = Wire.read();
@@ -112,7 +150,7 @@ bool DsubMasterCommunicator::handle_dsub_event(void)
       case I2C_DETECT_GOAL:
         DebugPrint("got GOAL");
         //  ゴールモジュールからの通知の場合
-        if(_comm_slave_adress == _slave_num){
+        if(_comm_slave_address == _slave_num){
           DebugPrint("GOAL from goal_module");
           //  PCにゲーム終了を通知
           _serialCommunicator->send(SERIAL_FINISH);
@@ -124,10 +162,10 @@ bool DsubMasterCommunicator::handle_dsub_event(void)
           //  PCにモジュール通過を通知
           _serialCommunicator->send(SERIAL_THROUGH);
           //  次のスレーブに通信開始を通知
-          Wire.beginTransmission(++_comm_slave_adress);
+          Wire.beginTransmission(++_comm_slave_address);
           Wire.write(I2C_BEGIN_TRANS);
           Wire.endTransmission();
-          sprintf(dprint_buff, "start i2c with SLAVE%d", _comm_slave_adress);
+          sprintf(dprint_buff, "start i2c with SLAVE%d", _comm_slave_address);
           DebugPrint(dprint_buff);
         }
         break;

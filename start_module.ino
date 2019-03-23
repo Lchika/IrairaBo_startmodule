@@ -36,6 +36,14 @@ void setup(void) {
   //  Dsub関係管理クラスのインスタンスを生成
   dsubMasterCommunicator = new DsubMasterCommunicator(slave_num,
                             serialCommunicator, INTERVAL_DSUB_COMM_MS);
+  
+  //  スレーブモジュールとの疎通確認
+  if(!dsubMasterCommunicator->confirm_connect()){
+    //  I2C接続に異常があるスレーブモジュールが存在する場合
+    //  今は特に処理内容を決めていないが、できればLED等を使って通知できるようにしたい
+    //  LEDの点滅回数で番号を通知?
+  }
+
   DebugPrint("created dsubMasterCommunicator");
 }
 

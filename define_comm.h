@@ -4,9 +4,10 @@
 #define DEFINE_COMM_H
 
 //  スレーブへ送信/受信する情報
-#define I2C_BEGIN_TRANS   0   //  通信を開始すること
-#define I2C_DETECT_HIT    1   //  HITを検知したこと
-#define I2C_DETECT_GOAL   2   //  通過/ゴールを検知したこと
+#define I2C_BEGIN_TRANS     0     //  通信を開始すること
+#define I2C_DETECT_HIT      1     //  HITを検知したこと
+#define I2C_DETECT_GOAL     2     //  通過/ゴールを検知したこと
+#define I2C_CHECK_CONNECT   99    //  接続確認用
 
 //  PCへ送信する情報
 const char SERIAL_START   = 's';  //  開始
