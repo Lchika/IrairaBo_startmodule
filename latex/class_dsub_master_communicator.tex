@@ -14,7 +14,9 @@ D-\/subを介した通信を管理するクラス、master用
 \item 
 \mbox{\hyperlink{class_dsub_master_communicator_af0d5f28218bbcfc0f93f195a0c6c3df6}{Dsub\+Master\+Communicator}} (unsigned char \mbox{\hyperlink{start__module_8ino_a74d30eb4a8cad665a32a15dbee48837f}{slave\+\_\+num}}, \mbox{\hyperlink{class_serial_communicator}{Serial\+Communicator}} $\ast$serial\+Comm, unsigned int interval\+\_\+comm\+\_\+req\+\_\+ms)
 \begin{DoxyCompactList}\small\item\em コンストラクタ \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{class_dsub_master_communicator_af8b31c088520cc95c05df13be86627f8}{active}} (unsigned char slave\+\_\+adress)
+bool \mbox{\hyperlink{class_dsub_master_communicator_acb3acb522c4ff0099044fe9451008864}{confirm\+\_\+connect}} (void)
+\begin{DoxyCompactList}\small\item\em スレーブ接続確認処理 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_dsub_master_communicator_a326013bfa0efeba26958317ce38706ac}{active}} (unsigned char slave\+\_\+address)
 \begin{DoxyCompactList}\small\item\em 活性化処理 \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{class_dsub_master_communicator_ac0a9298c691adbdf844f85d680d7e554}{dis\+\_\+active}} (void)
 \begin{DoxyCompactList}\small\item\em 状態リセット処理 \end{DoxyCompactList}\item 
@@ -53,11 +55,11 @@ None
 
 
 \subsection{関数詳解}
-\mbox{\Hypertarget{class_dsub_master_communicator_af8b31c088520cc95c05df13be86627f8}\label{class_dsub_master_communicator_af8b31c088520cc95c05df13be86627f8}} 
+\mbox{\Hypertarget{class_dsub_master_communicator_a326013bfa0efeba26958317ce38706ac}\label{class_dsub_master_communicator_a326013bfa0efeba26958317ce38706ac}} 
 \index{DsubMasterCommunicator@{DsubMasterCommunicator}!active@{active}}
 \index{active@{active}!DsubMasterCommunicator@{DsubMasterCommunicator}}
 \subsubsection{\texorpdfstring{active()}{active()}}
-{\footnotesize\ttfamily bool Dsub\+Master\+Communicator\+::active (\begin{DoxyParamCaption}\item[{unsigned char}]{slave\+\_\+adress }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool Dsub\+Master\+Communicator\+::active (\begin{DoxyParamCaption}\item[{unsigned char}]{slave\+\_\+address }\end{DoxyParamCaption})}
 
 
 
@@ -76,7 +78,33 @@ None
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=283pt]{class_dsub_master_communicator_af8b31c088520cc95c05df13be86627f8_icgraph}
+\includegraphics[width=283pt]{class_dsub_master_communicator_a326013bfa0efeba26958317ce38706ac_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_dsub_master_communicator_acb3acb522c4ff0099044fe9451008864}\label{class_dsub_master_communicator_acb3acb522c4ff0099044fe9451008864}} 
+\index{DsubMasterCommunicator@{DsubMasterCommunicator}!confirm\_connect@{confirm\_connect}}
+\index{confirm\_connect@{confirm\_connect}!DsubMasterCommunicator@{DsubMasterCommunicator}}
+\subsubsection{\texorpdfstring{confirm\_connect()}{confirm\_connect()}}
+{\footnotesize\ttfamily bool Dsub\+Master\+Communicator\+::confirm\+\_\+connect (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+スレーブ接続確認処理 
+
+
+\begin{DoxyParams}{引数}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{戻り値}
+bool true\+:すべて正常、false\+:接続できていないスレーブがある(スレーブ番号はデバッグ出力で確認可能) 
+\end{DoxyReturn}
+被呼び出し関係図\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=289pt]{class_dsub_master_communicator_acb3acb522c4ff0099044fe9451008864_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{class_dsub_master_communicator_ac0a9298c691adbdf844f85d680d7e554}\label{class_dsub_master_communicator_ac0a9298c691adbdf844f85d680d7e554}} 

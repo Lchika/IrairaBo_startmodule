@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['dis_5factive',['dis_active',['../class_dsub_master_communicator.html#ac0a9298c691adbdf844f85d680d7e554',1,'DsubMasterCommunicator']]],
-  ['dsubmastercommunicator',['DsubMasterCommunicator',['../class_dsub_master_communicator.html#af0d5f28218bbcfc0f93f195a0c6c3df6',1,'DsubMasterCommunicator']]]
+  ['confirm_5fconnect',['confirm_connect',['../class_dsub_master_communicator.html#acb3acb522c4ff0099044fe9451008864',1,'DsubMasterCommunicator']]]
 ];

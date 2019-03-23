@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['loop',['loop',['../start__module_8ino.html#a0b33edabd7f1c4e4a0bf32c67269be2f',1,'start_module.ino']]]
+  ['handle_5fdsub_5fevent',['handle_dsub_event',['../class_dsub_master_communicator.html#a91a5a356d0aa58a30f3381522cd7616f',1,'DsubMasterCommunicator']]]
 ];
