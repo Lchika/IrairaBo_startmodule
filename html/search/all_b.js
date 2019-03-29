@@ -8,7 +8,7 @@ var searchData=
   ['serial_5fpoint',['SERIAL_POINT',['../define__comm_8h.html#aba3035eabde5558dd524f38d9f6861d1',1,'define_comm.h']]],
   ['serial_5fstart',['SERIAL_START',['../define__comm_8h.html#a9afbd722eceaab7ba3eec2a42915bf57',1,'define_comm.h']]],
   ['serial_5fthrough',['SERIAL_THROUGH',['../define__comm_8h.html#af1e801f13504c69d434509326beabc8f',1,'define_comm.h']]],
-  ['serialcommunicator',['SerialCommunicator',['../class_serial_communicator.html',1,'SerialCommunicator'],['../class_serial_communicator.html#ac3f793f4b7e9624915921f5c6922159b',1,'SerialCommunicator::SerialCommunicator()'],['../start__module_8ino.html#a432be7f3eee18ba7ccdf2ab1d8908ae1',1,'serialCommunicator():&#160;start_module.ino']]],
+  ['serialcommunicator',['SerialCommunicator',['../class_serial_communicator.html',1,'SerialCommunicator'],['../class_serial_communicator.html#aedf0af950a1920d4efafe41fac072b1a',1,'SerialCommunicator::SerialCommunicator()'],['../start__module_8ino.html#a432be7f3eee18ba7ccdf2ab1d8908ae1',1,'serialCommunicator():&#160;start_module.ino']]],
   ['setup',['setup',['../start__module_8ino.html#a7dfd9b79bc5a37d7df40207afbc5431f',1,'start_module.ino']]],
   ['slave_5fnum',['slave_num',['../start__module_8ino.html#a74d30eb4a8cad665a32a15dbee48837f',1,'start_module.ino']]],
   ['start_5fmodule_2eh',['start_module.h',['../start__module_8h.html',1,'']]],

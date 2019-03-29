@@ -9,7 +9,9 @@
  * @param[in] baudrate  ボーレート
  * @return None
  */
-SerialCommunicator::SerialCommunicator(int pin_rx, int pin_tx, int baudrate)
+SerialCommunicator::SerialCommunicator(int pin_rx,
+  int pin_tx, int baudrate, int timeout_ms)
+  :_timeout(timeout_ms)
 {
   DebugPrint("start");
   serial = new SoftwareSerial(pin_rx, pin_tx);
@@ -48,7 +50,14 @@ bool SerialCommunicator::send(char massage){
   sprintf(dprint_buff, "massage = %c", massage);
   DebugPrint(dprint_buff);
   DebugPrint("wait response start");
-  while(serial->read() != massage){}
+  unsigned long send_time = millis();
+  while(serial->read() != massage){
+    if(millis() - send_time > _timeout){
+      //  通信タイムアウト処理
+      //  今はログを出すだけ
+      DebugPrint("<ERROR> timeout");
+    }
+  }
   DebugPrint("got response");
   DebugPrint("end");
   return true;
