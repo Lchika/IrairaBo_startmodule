@@ -56,6 +56,7 @@ bool SerialCommunicator::send(char massage){
       //  通信タイムアウト処理
       //  今はログを出すだけ
       DebugPrint("<ERROR> timeout");
+      break;
     }
   }
   DebugPrint("got response");
