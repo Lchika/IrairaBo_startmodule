@@ -37,21 +37,21 @@ SerialCommunicator::~SerialCommunicator(void)
 
 /**
  * @brief 送信処理
- * @param[in] massage 送信メッセージ
+ * @param[in] message 送信メッセージ
  * @return bool true:エラーなし, false:エラーあり
  */
-bool SerialCommunicator::send(char massage){
+bool SerialCommunicator::send(char message){
   DebugPrint("start");
-  if(massage == NULL){
-    DebugPrint("<ERROR> incalid value");
+  if(message == NULL){
+    DebugPrint("<ERROR> invalid value");
     return false;
   }
-  serial->write(massage);
-  sprintf(dprint_buff, "massage = %c", massage);
+  serial->write(message);
+  sprintf(dprint_buff, "message = %c", message);
   DebugPrint(dprint_buff);
   DebugPrint("wait response start");
   unsigned long send_time = millis();
-  while(serial->read() != massage){
+  while(serial->read() != message){
     if(millis() - send_time > _timeout){
       //  通信タイムアウト処理
       //  今はログを出すだけ

@@ -16,7 +16,7 @@ private:
 public:
   SerialCommunicator(int pin_rx, int pin_tx, int baudrate, int timeout_ms = 3000);
   ~SerialCommunicator(void);
-  bool send(char massage);
+  bool send(char message);
 };
 
 #endif

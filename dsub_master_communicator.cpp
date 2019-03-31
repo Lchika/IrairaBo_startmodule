@@ -137,9 +137,9 @@ bool DsubMasterCommunicator::handle_dsub_event(void)
   Wire.requestFrom(_comm_slave_address, I2C_DATA_SIZE);
   //  スレーブからの返信を処理
   while(Wire.available()){
-    byte massage = Wire.read();
+    byte message = Wire.read();
     //  返信内容によって処理を変える
-    switch(massage){
+    switch(message){
       //  コース接触通知
       case I2C_DETECT_HIT:
         DebugPrint("got HIT");
