@@ -9,10 +9,10 @@
 #define PIN_HIT_START       4   //当たった判定ピン(スタートモジュール)
 #define PIN_RX              11  //ソフトウェアシリアルRX
 #define PIN_TX              13  //ソフトウェアシリアルTX
-#define PIN_DIP_0           6   //DIPスイッチbit0
-#define PIN_DIP_1           7   //DIPスイッチbit1
-#define PIN_DIP_2           8   //DIPスイッチbit2
-#define PIN_DIP_3           9   //DIPスイッチbit3
+#define PIN_DIP_0           10   //DIPスイッチbit0
+#define PIN_DIP_1           8   //DIPスイッチbit1
+#define PIN_DIP_2           9   //DIPスイッチbit2
+#define PIN_DIP_3           7   //DIPスイッチbit3
 #define PIN_SERVO           3   //多回転サーボの信号線用ピン
 #define PIN_LED             5   //スタート部分のLEDの出力用ピン
 
