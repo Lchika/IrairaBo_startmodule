@@ -14,6 +14,7 @@
 #define PIN_DIP_2           9   //DIPスイッチbit2
 #define PIN_DIP_3           7   //DIPスイッチbit3
 #define PIN_SERVO           3   //多回転サーボの信号線用ピン
+#define PIN_LED             5   //スタート部分のLEDの出力用ピン
 #define PIN_START_SW        12  //スタート部分のマイクロスイッチ
 
 /* PC とのソフトウェアシリアル通信関係 */

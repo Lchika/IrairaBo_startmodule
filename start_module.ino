@@ -6,12 +6,14 @@
 #include "dsub_master_communicator.hpp"
 #include "debug.h"
 #include <Arduino.h>
+#include <Servo.h>
 
 /* クラス・変数宣言 */
 unsigned char slave_num;    // スレーブの数(ゴールモジュールを含む)
 DsubMasterCommunicator *dsubMasterCommunicator = NULL;    //  Dsub関係管理用
 SerialCommunicator *serialCommunicator = NULL;            //  シリアル通信管理用
-char dprint_buff[128];
+char dprint_buff[128];                                    //  デバッグ出力用バッファ
+Servo myservo;                                            //  多回転サーボ動作用
 
 void setup(void) {
   BeginDebugPrint();
@@ -48,6 +50,7 @@ void setup(void) {
   }
 
   DebugPrint("created dsubMasterCommunicator");
+  myservo.attach(PIN_SERVO);  
 }
 
 /**
@@ -84,6 +87,8 @@ void loop(void) {
         serialCommunicator->send(SERIAL_HIT);
       }
 
+      myservo.write(60);  //一方方向へ回転
+
       //  スタートモジュールゴール判定処理
       if(digitalRead(PIN_GOAL_START) == LOW) { //  通過したかどうか
         //  PCにモジュール通過を通知
@@ -92,6 +97,7 @@ void loop(void) {
         dsubMasterCommunicator->active(0x01);
         //  スレーブモジュール通過中状態に遷移
         state = STATE_IN_SLAVE_M;
+        myservo.write(90);  //サーボ停止
       }
       break;
     
