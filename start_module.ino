@@ -11,6 +11,7 @@
 unsigned char slave_num;    // スレーブの数(ゴールモジュールを含む)
 DsubMasterCommunicator *dsubMasterCommunicator = NULL;    //  Dsub関係管理用
 SerialCommunicator *serialCommunicator = NULL;            //  シリアル通信管理用
+char dprint_buff[128];
 
 void setup(void) {
   BeginDebugPrint();
@@ -32,6 +33,8 @@ void setup(void) {
 
   //  接続スレーブ数を確認
   slave_num = ReadDipSwitch();
+  sprintf(dprint_buff, "slave num = %d", slave_num);
+  DebugPrint(dprint_buff);
 
   //  Dsub関係管理クラスのインスタンスを生成
   dsubMasterCommunicator = new DsubMasterCommunicator(slave_num,
@@ -64,23 +67,25 @@ void loop(void) {
   switch(state) {
     /* PCへSTARTメッセージを送り、返答を受け取ったらスタートモジュール通過中状態に遷移 */
     case STATE_WAIT_START:
-      DebugPrint("STATE: START");
+      //DebugPrint("STATE: START");
 
-      serialCommunicator->send(SERIAL_START);
-      state = STATE_IN_START_M;
-      DebugPrint("STATE: RUNNING");
+      if(digitalRead(PIN_START_SW) == LOW){
+        serialCommunicator->send(SERIAL_START);
+        state = STATE_IN_START_M;
+        DebugPrint("STATE: RUNNING");
+      }
       break;
 
     /* スタートモジュール通過判定を検知したらスレーブモジュール通過中状態へ遷移 */
     case STATE_IN_START_M:
       //  スタートモジュールの当たり判定処理
-      if(digitalRead(PIN_HIT_START) == HIGH) {  //  HIT判定があるかどうか
+      if(digitalRead(PIN_HIT_START) == LOW) {  //  HIT判定があるかどうか
         //  PCにコース接触を通知
         serialCommunicator->send(SERIAL_HIT);
       }
 
       //  スタートモジュールゴール判定処理
-      if(digitalRead(PIN_GOAL_START) == HIGH) { //  通過したかどうか
+      if(digitalRead(PIN_GOAL_START) == LOW) { //  通過したかどうか
         //  PCにモジュール通過を通知
         serialCommunicator->send(SERIAL_THROUGH);
         //  D-sub通信を開始する(スレーブアドレス0x01指定)
