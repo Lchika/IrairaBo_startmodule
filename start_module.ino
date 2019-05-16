@@ -51,6 +51,7 @@ void setup(void) {
 
   DebugPrint("created dsubMasterCommunicator");
   myservo.attach(PIN_SERVO);  
+  myservo.write(90);  //サーボ停止
 }
 
 /**
