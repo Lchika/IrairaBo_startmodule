@@ -114,6 +114,13 @@ void loop(void) {
     case STATE_IN_SLAVE_M:
       //  Dsub関係イベント処理(これは定期的に呼ぶ必要がある)
       dsubMasterCommunicator->handle_dsub_event();
+
+      //  Dsub通信が終了していた場合
+      if(!dsubMasterCommunicator->get_active()){
+        //  すべてのモジュールを通過し終えているのでゲーム終了
+        //  スタート待機状態に戻る
+        state = STATE_WAIT_START;
+      }
       break;
 
     default:
