@@ -67,6 +67,7 @@ void setup(void) {
 void loop(void) {
   /* ループ処理内で使用する変数 */
   static int state = STATE_WAIT_START;  //  初期状態は開始待ち状態
+  static unsigned long last_hit_time = millis();
 
   switch(state) {
     /* PCへSTARTメッセージを送り、返答を受け取ったらスタートモジュール通過中状態に遷移 */
@@ -84,8 +85,15 @@ void loop(void) {
     case STATE_IN_START_M:
       //  スタートモジュールの当たり判定処理
       if(digitalRead(PIN_HIT_START) == LOW) {  //  HIT判定があるかどうか
-        //  PCにコース接触を通知
-        serialCommunicator->send(SERIAL_HIT);
+        //  現在時刻取得
+        unsigned long now_time = millis();
+        //  最終接触検知時刻と現在時刻との差が閾値以上であればPCに接触通知
+        if((now_time - last_hit_time) > INTERVAL_DETECT_HIT_MS){
+          //  最終接触時刻を更新
+          last_hit_time = now_time;
+          //  PCにコース接触を通知
+          serialCommunicator->send(SERIAL_HIT);
+        }
       }
 
       myservo.write(60);  //一方方向へ回転

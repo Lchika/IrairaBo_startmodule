@@ -30,4 +30,7 @@ typedef enum _RUN_STATE_E{
   STATE_IN_SLAVE_M,        //スレーブモジュール通過中状態
 } RUN_STATE_E;
 
+/* モジュール動作関係 */
+#define INTERVAL_DETECT_HIT_MS 2000 //  コース接触検知間隔[ms]
+
 #endif //_START_MODULE_H_

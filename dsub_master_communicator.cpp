@@ -47,13 +47,16 @@ bool DsubMasterCommunicator::confirm_connect(void)
 
     //  疎通確認メッセージが届いているかスレーブに問い合わせる
     bool is_vaild = false;
-    Wire.requestFrom(slave_address, 1);
+    Wire.requestFrom(slave_address, I2C_DATA_SIZE);
     while(Wire.available()){
-      if(Wire.read() == I2C_BEGIN_TRANS){
+      if(Wire.read() == I2C_CHECK_CONNECT){
         is_vaild = true;
       }
     }
-    if(!is_vaild){
+    if(is_vaild){
+      sprintf(dprint_buff, "slave(%d) connection OK", slave_address);
+      DebugPrint(dprint_buff);
+    }else{
       sprintf(dprint_buff, "<ERROR> found invalid slave! (%d)", slave_address);
       DebugPrint(dprint_buff);
       is_slaves_valid = false;
