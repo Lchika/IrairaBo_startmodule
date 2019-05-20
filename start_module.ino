@@ -25,6 +25,8 @@ void setup(void) {
 
   pinMode(PIN_GOAL_START, INPUT);   //  ゴール判定ピン(スタート)を入力に設定
   pinMode(PIN_HIT_START, INPUT);    //  当たった判定ピン(スタートモジュール)を入力に設定
+  pinMode(PIN_LED, OUTPUT);         //  LEDピンを出力に設定
+  digitalWrite(PIN_LED, LOW);       //  LED OFF
   
   /* ディップスイッチを入力として設定 */
   pinMode(PIN_DIP_0, INPUT);
@@ -41,17 +43,21 @@ void setup(void) {
   //  Dsub関係管理クラスのインスタンスを生成
   dsubMasterCommunicator = new DsubMasterCommunicator(slave_num,
                             serialCommunicator, INTERVAL_DSUB_COMM_MS);
+  DebugPrint("created dsubMasterCommunicator");
   
   //  スレーブモジュールとの疎通確認
-  if(!dsubMasterCommunicator->confirm_connect()){
+  //  全スレーブとの通信が成功するまでこのループは抜けられない
+  while(!dsubMasterCommunicator->confirm_connect()){
     //  I2C接続に異常があるスレーブモジュールが存在する場合
-    //  今は特に処理内容を決めていないが、できればLED等を使って通知できるようにしたい
-    //  LEDの点滅回数で番号を通知?
+    //  スタート地点のLEDを点滅させる
+    blink_led(PIN_LED, LED_ERROR_INTERVAL_MS, LED_ERROR_BLINK_COUNT);
+    delay(1000);
   }
 
-  DebugPrint("created dsubMasterCommunicator");
   myservo.attach(PIN_SERVO);  
   myservo.write(90);  //サーボ停止
+  DebugPrint("setup end");
+  return;
 }
 
 /**
@@ -93,6 +99,8 @@ void loop(void) {
           last_hit_time = now_time;
           //  PCにコース接触を通知
           serialCommunicator->send(SERIAL_HIT);
+          //  LEDを点滅させる
+          blink_led(PIN_LED, LED_HIT_INTERVAL_MS, LED_HIT_BLINK_COUNT);
         }
       }
 
@@ -128,6 +136,7 @@ void loop(void) {
       DebugPrint("!!STATE BUG!!");
       break;
   }
+  return;
 }
 
 /* ディップスイッチの値を10進数で読み取る */
@@ -148,4 +157,21 @@ unsigned char ReadDipSwitch(void) {
   }
 
   return value;
+}
+
+/**
+ * @brief LED点滅処理
+ * @param[in] pin         LED出力ピン
+ * @param[in] blink_time  点滅間隔[ms]
+ * @param[in] blink_count 点滅回数
+ * @return None
+ */
+void blink_led(int pin, int blink_time, int blink_count){
+  for(int i = 0; i < blink_count; i++){
+    digitalWrite(pin, HIGH);
+    delay(blink_time);
+    digitalWrite(pin, LOW);
+    delay(blink_time);
+  }
+  return;
 }

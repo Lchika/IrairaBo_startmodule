@@ -31,6 +31,10 @@ typedef enum _RUN_STATE_E{
 } RUN_STATE_E;
 
 /* モジュール動作関係 */
-#define INTERVAL_DETECT_HIT_MS 2000 //  コース接触検知間隔[ms]
+#define INTERVAL_DETECT_HIT_MS  2000  //  コース接触検知間隔[ms]
+#define LED_ERROR_INTERVAL_MS   50    //  エラー時LED点滅間隔[ms]
+#define LED_ERROR_BLINK_COUNT   30    //  エラー時LED点滅回数
+#define LED_HIT_INTERVAL_MS     50    //  コース接触時LED点滅間隔[ms]
+#define LED_HIT_BLINK_COUNT     5     //  コース接触時LED点滅回数
 
 #endif //_START_MODULE_H_
