@@ -5,16 +5,17 @@
 #define _START_MODULE_H_
 
 /* Arduino のピン定義 */
-#define PIN_GOAL_START      2  //ゴール判定ピン(スタートモジュール)
+#define PIN_GOAL_START      2   //ゴール判定ピン(スタートモジュール)
 #define PIN_HIT_START       4   //当たった判定ピン(スタートモジュール)
 #define PIN_RX              11  //ソフトウェアシリアルRX
 #define PIN_TX              13  //ソフトウェアシリアルTX
-#define PIN_DIP_0           10   //DIPスイッチbit0
+#define PIN_DIP_0           10  //DIPスイッチbit0
 #define PIN_DIP_1           8   //DIPスイッチbit1
 #define PIN_DIP_2           9   //DIPスイッチbit2
 #define PIN_DIP_3           7   //DIPスイッチbit3
 #define PIN_SERVO           3   //多回転サーボの信号線用ピン
 #define PIN_LED             5   //スタート部分のLEDの出力用ピン
+#define PIN_START_SW        12  //スタート部分のマイクロスイッチ
 
 /* PC とのソフトウェアシリアル通信関係 */
 #define PC_SSERIAL_BAUDRATE     9600  //ボーレート
@@ -28,5 +29,12 @@ typedef enum _RUN_STATE_E{
   STATE_IN_START_M,        //スタートモジュール通過中状態
   STATE_IN_SLAVE_M,        //スレーブモジュール通過中状態
 } RUN_STATE_E;
+
+/* モジュール動作関係 */
+#define INTERVAL_DETECT_HIT_MS  2000  //  コース接触検知間隔[ms]
+#define LED_ERROR_INTERVAL_MS   50    //  エラー時LED点滅間隔[ms]
+#define LED_ERROR_BLINK_COUNT   30    //  エラー時LED点滅回数
+#define LED_HIT_INTERVAL_MS     50    //  コース接触時LED点滅間隔[ms]
+#define LED_HIT_BLINK_COUNT     5     //  コース接触時LED点滅回数
 
 #endif //_START_MODULE_H_
