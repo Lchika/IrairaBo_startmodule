@@ -132,7 +132,7 @@ void loop(void) {
         }
       }
 
-      myservo.write(60);  //一方方向へ回転
+      myservo.write(80);  //一方方向へ回転
 
       //  スタートモジュールゴール判定処理
       if(digitalRead(PIN_GOAL_START) == LOW) { //  通過したかどうか
