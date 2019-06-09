@@ -16,6 +16,11 @@
 #define PIN_SERVO           3   //多回転サーボの信号線用ピン
 #define PIN_LED             5   //スタート部分のLEDの出力用ピン
 #define PIN_START_SW        12  //スタート部分のマイクロスイッチ
+#define PIN_VMOTOR          6   //振動モータ
+#define PIN_LED_STICK       14  //棒部分のLED出力用ピン
+#define PIN_SOFT_RX1        15  //DFPlayerMini用シリアル
+#define PIN_SOFT_TX1        16  //DFPlayerMini用シリアル
+
 
 /* PC とのソフトウェアシリアル通信関係 */
 #define PC_SSERIAL_BAUDRATE     9600  //ボーレート
@@ -31,10 +36,14 @@ typedef enum _RUN_STATE_E{
 } RUN_STATE_E;
 
 /* モジュール動作関係 */
-#define INTERVAL_DETECT_HIT_MS  2000  //  コース接触検知間隔[ms]
+#define INTERVAL_DETECT_HIT_MS  1000  //  コース接触検知間隔[ms]
 #define LED_ERROR_INTERVAL_MS   50    //  エラー時LED点滅間隔[ms]
 #define LED_ERROR_BLINK_COUNT   30    //  エラー時LED点滅回数
 #define LED_HIT_INTERVAL_MS     50    //  コース接触時LED点滅間隔[ms]
 #define LED_HIT_BLINK_COUNT     5     //  コース接触時LED点滅回数
+#define TIME_VMOTOR_MOVE_MS     50    //  振動モータを動かす時間[ms]
+#define POWER_VMOTER_MOVE       100   //  振動モータに印加する電圧の大きさ(0-255)
+#define LED_HIT_S_INTERVAL_MS   50    //  コース接触時棒部分LED点滅間隔[ms]
+#define LED_HIT_S_BLINK_COUNT   3     //  コース接触時棒部分LED点滅回数
 
 #endif //_START_MODULE_H_

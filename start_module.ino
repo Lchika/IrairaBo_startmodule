@@ -7,6 +7,9 @@
 #include "debug.h"
 #include <Arduino.h>
 #include <Servo.h>
+#include <DFRobotDFPlayerMini.h>
+#include <ArduinoSTL.h>
+#include <map>
 
 /* クラス・変数宣言 */
 unsigned char slave_num;    // スレーブの数(ゴールモジュールを含む)
@@ -14,6 +17,8 @@ DsubMasterCommunicator *dsubMasterCommunicator = NULL;    //  Dsub関係管理�
 SerialCommunicator *serialCommunicator = NULL;            //  シリアル通信管理用
 char dprint_buff[128];                                    //  デバッグ出力用バッファ
 Servo myservo;                                            //  多回転サーボ動作用
+SoftwareSerial softwareSerial(PIN_SOFT_RX1, PIN_SOFT_TX1);    // RX, TX
+DFRobotDFPlayerMini dFPlayer;
 
 void setup(void) {
   BeginDebugPrint();
@@ -21,12 +26,15 @@ void setup(void) {
 
   //  シリアル通信管理クラスのインスタンスを生成
   serialCommunicator = new SerialCommunicator(PIN_RX, PIN_TX, PC_SSERIAL_BAUDRATE);
+  softwareSerial.begin(9600);
   DebugPrint("SoftwareSerial ready");
 
   pinMode(PIN_GOAL_START, INPUT);   //  ゴール判定ピン(スタート)を入力に設定
   pinMode(PIN_HIT_START, INPUT);    //  当たった判定ピン(スタートモジュール)を入力に設定
   pinMode(PIN_LED, OUTPUT);         //  LEDピンを出力に設定
   digitalWrite(PIN_LED, LOW);       //  LED OFF
+  pinMode(PIN_VMOTOR, OUTPUT);
+  pinMode(PIN_LED_STICK, OUTPUT);
   
   /* ディップスイッチを入力として設定 */
   pinMode(PIN_DIP_0, INPUT);
@@ -40,9 +48,11 @@ void setup(void) {
   sprintf(dprint_buff, "slave num = %d", slave_num);
   DebugPrint(dprint_buff);
 
+  std::map<String, void(*)()> call_backs;
+  call_backs["onHit"] = func_on_hit;
   //  Dsub関係管理クラスのインスタンスを生成
   dsubMasterCommunicator = new DsubMasterCommunicator(slave_num,
-                            serialCommunicator, INTERVAL_DSUB_COMM_MS);
+                            serialCommunicator, INTERVAL_DSUB_COMM_MS, call_backs);
   DebugPrint("created dsubMasterCommunicator");
   
   //  スレーブモジュールとの疎通確認
@@ -53,6 +63,22 @@ void setup(void) {
     blink_led(PIN_LED, LED_ERROR_INTERVAL_MS, LED_ERROR_BLINK_COUNT);
     delay(1000);
   }
+
+  //  DFPlayer起動準備
+  softwareSerial.listen();
+  if (!dFPlayer.begin(softwareSerial)) {  //Use softwareSerial to communicate with mp3.
+    DebugPrint("Unable to begin:");
+    DebugPrint("1.Please recheck the connection!");
+    DebugPrint("2.Please insert the SD card!");
+    while(true){
+      delay(0); // Code to compatible with ESP8266 watch dog.
+    }
+  }
+  DebugPrint("DFPlayer Mini online.");
+  //  DFPlayerの音量設定
+  softwareSerial.listen();
+  dFPlayer.volume(10);
+  dFPlayer.disableLoopAll();
 
   myservo.attach(PIN_SERVO);  
   myservo.write(90);  //サーボ停止
@@ -99,6 +125,8 @@ void loop(void) {
           last_hit_time = now_time;
           //  PCにコース接触を通知
           serialCommunicator->send(SERIAL_HIT);
+          //  振動モータを作動
+          func_on_hit();
           //  LEDを点滅させる
           blink_led(PIN_LED, LED_HIT_INTERVAL_MS, LED_HIT_BLINK_COUNT);
         }
@@ -174,4 +202,29 @@ void blink_led(int pin, int blink_time, int blink_count){
     delay(blink_time);
   }
   return;
+}
+
+/**
+ * @brief 振動モータ作動処理
+ * @param[in] drive_time  作動時間[ms]
+ * @return None
+ */
+static void drive_vmotor(int drive_time){
+  analogWrite(PIN_VMOTOR, POWER_VMOTER_MOVE);
+  delay(drive_time);
+  analogWrite(PIN_VMOTOR, 0);
+}
+
+/**
+ * @brief コース接触時処理
+ * @return None
+ */
+static void func_on_hit(void){
+  //  振動モータを作動
+  drive_vmotor(TIME_VMOTOR_MOVE_MS);
+  //  LEDを点滅
+  blink_led(PIN_LED_STICK, LED_HIT_S_INTERVAL_MS, LED_HIT_S_BLINK_COUNT);
+  //  HIT音再生
+  softwareSerial.listen();
+  dFPlayer.play(1);         //Play the first mp3
 }
