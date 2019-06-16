@@ -77,7 +77,7 @@ void setup(void) {
   DebugPrint("DFPlayer Mini online.");
   //  DFPlayerの音量設定
   softwareSerial.listen();
-  dFPlayer.volume(10);
+  dFPlayer.volume(5);
   dFPlayer.disableLoopAll();
 
   myservo.attach(PIN_SERVO);  
