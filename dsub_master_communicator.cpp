@@ -11,11 +11,13 @@
  * @return None
  */
 DsubMasterCommunicator::DsubMasterCommunicator(unsigned char slave_num,
-  SerialCommunicator *serialComm, unsigned int interval_comm_req_ms, std::map<String, void(*)()> call_backs)
+  //SerialCommunicator *serialComm, unsigned int interval_comm_req_ms, std::map<String, void(*)()> call_backs)
+  SerialCommunicator *serialComm, unsigned int interval_comm_req_ms, void(*on_hit_func)())
   :_slave_num(slave_num)
   ,_serialCommunicator(serialComm)
   ,_interval_comm_ms(interval_comm_req_ms)
-  ,_call_backs(call_backs)
+  //,_call_backs(call_backs)
+  ,_on_hit_func(on_hit_func)
 {
   DebugPrint("start");
   //  マスタとしてI2C通信開始
@@ -125,7 +127,7 @@ bool DsubMasterCommunicator::get_active(void)
 bool DsubMasterCommunicator::handle_dsub_event(void)
 {
   static long last_handle_time = millis();  //  前回実行時間
-  decltype(_call_backs)::iterator itr;
+  //decltype(_call_backs)::iterator itr;
   //DebugPrint("start");
   if(!(this->_active)){
     //  不活性状態の場合は何もしない
@@ -149,10 +151,13 @@ bool DsubMasterCommunicator::handle_dsub_event(void)
       case I2C_DETECT_HIT:
         DebugPrint("got HIT");
         //  コールバック関数群に"onHit"が登録されていたら実行する
+        /*
         itr = _call_backs.find("onHit");
         if(itr != _call_backs.end()){
           itr->second();
         }
+        */
+        _on_hit_func();
         //  PCにコース接触を通知
         _serialCommunicator->send(SERIAL_HIT);
         break;
@@ -160,10 +165,12 @@ bool DsubMasterCommunicator::handle_dsub_event(void)
       case I2C_DETECT_GOAL:
         DebugPrint("got GOAL");
         //  コールバック関数群に"onGoal"が登録されていたら実行する
+        /*
         itr = _call_backs.find("onGoal");
         if(itr != _call_backs.end()){
           itr->second();
         }
+        */
         //  ゴールモジュールからの通知の場合
         if(_comm_slave_address == _slave_num){
           DebugPrint("GOAL from goal_module");

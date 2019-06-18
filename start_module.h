@@ -41,8 +41,8 @@ typedef enum _RUN_STATE_E{
 #define LED_ERROR_BLINK_COUNT   30    //  エラー時LED点滅回数
 #define LED_HIT_INTERVAL_MS     50    //  コース接触時LED点滅間隔[ms]
 #define LED_HIT_BLINK_COUNT     5     //  コース接触時LED点滅回数
-#define TIME_VMOTOR_MOVE_MS     50    //  振動モータを動かす時間[ms]
-#define POWER_VMOTER_MOVE       100   //  振動モータに印加する電圧の大きさ(0-255)
+#define TIME_VMOTOR_MOVE_MS     300   //  振動モータを動かす時間[ms]
+#define POWER_VMOTER_MOVE       130   //  振動モータに印加する電圧の大きさ(0-255)
 #define LED_HIT_S_INTERVAL_MS   50    //  コース接触時棒部分LED点滅間隔[ms]
 #define LED_HIT_S_BLINK_COUNT   3     //  コース接触時棒部分LED点滅回数
 

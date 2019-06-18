@@ -13,7 +13,7 @@
     #define BeginDebugPrint()    Serial.begin( 9600 )
     #define DebugPrint( message )\
         {\
-            char __buff__[ 128 ];\
+            char __buff__[ 64 ];\
             sprintf( __buff__\
                    , "%s"\
                    , message);\

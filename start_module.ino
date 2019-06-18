@@ -8,17 +8,20 @@
 #include <Arduino.h>
 #include <Servo.h>
 #include <DFRobotDFPlayerMini.h>
-#include <ArduinoSTL.h>
-#include <map>
+//#include <ArduinoSTL.h>
+//#include <map>
+
+#define DFPLAYER_ON
 
 /* クラス・変数宣言 */
 unsigned char slave_num;    // スレーブの数(ゴールモジュールを含む)
 DsubMasterCommunicator *dsubMasterCommunicator = NULL;    //  Dsub関係管理用
 SerialCommunicator *serialCommunicator = NULL;            //  シリアル通信管理用
-char dprint_buff[128];                                    //  デバッグ出力用バッファ
+char dprint_buff[64];                                    //  デバッグ出力用バッファ
 Servo myservo;                                            //  多回転サーボ動作用
 SoftwareSerial softwareSerial(PIN_SOFT_RX1, PIN_SOFT_TX1);    // RX, TX
 DFRobotDFPlayerMini dFPlayer;
+//std::map<String, void(*)()> call_backs;
 
 void setup(void) {
   BeginDebugPrint();
@@ -48,11 +51,12 @@ void setup(void) {
   sprintf(dprint_buff, "slave num = %d", slave_num);
   DebugPrint(dprint_buff);
 
-  std::map<String, void(*)()> call_backs;
-  call_backs["onHit"] = func_on_hit;
+  //call_backs["onHit"] = func_on_hit;
   //  Dsub関係管理クラスのインスタンスを生成
+  //dsubMasterCommunicator = new DsubMasterCommunicator(slave_num,
+  //                          serialCommunicator, INTERVAL_DSUB_COMM_MS, call_backs);
   dsubMasterCommunicator = new DsubMasterCommunicator(slave_num,
-                            serialCommunicator, INTERVAL_DSUB_COMM_MS, call_backs);
+                            serialCommunicator, INTERVAL_DSUB_COMM_MS, func_on_hit);
   DebugPrint("created dsubMasterCommunicator");
   
   //  スレーブモジュールとの疎通確認
@@ -65,6 +69,7 @@ void setup(void) {
   }
 
   //  DFPlayer起動準備
+#ifdef DFPLAYER_ON
   softwareSerial.listen();
   if (!dFPlayer.begin(softwareSerial)) {  //Use softwareSerial to communicate with mp3.
     DebugPrint("Unable to begin:");
@@ -77,8 +82,9 @@ void setup(void) {
   DebugPrint("DFPlayer Mini online.");
   //  DFPlayerの音量設定
   softwareSerial.listen();
-  dFPlayer.volume(5);
+  dFPlayer.volume(10);
   dFPlayer.disableLoopAll();
+#endif
 
   myservo.attach(PIN_SERVO);  
   myservo.write(90);  //サーボ停止
@@ -220,11 +226,13 @@ static void drive_vmotor(int drive_time){
  * @return None
  */
 static void func_on_hit(void){
+#ifdef DFPLAYER_ON
+  //  HIT音再生
+  softwareSerial.listen();
+  dFPlayer.play(1);         //Play the first mp3
+#endif
   //  振動モータを作動
   drive_vmotor(TIME_VMOTOR_MOVE_MS);
   //  LEDを点滅
   blink_led(PIN_LED_STICK, LED_HIT_S_INTERVAL_MS, LED_HIT_S_BLINK_COUNT);
-  //  HIT音再生
-  softwareSerial.listen();
-  dFPlayer.play(1);         //Play the first mp3
 }
