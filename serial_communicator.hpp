@@ -10,7 +10,7 @@
 class SerialCommunicator {
 private:
   SoftwareSerial *serial = NULL;
-  char dprint_buff[128];
+  char dprint_buff[64];
   int _timeout;
 
 public:

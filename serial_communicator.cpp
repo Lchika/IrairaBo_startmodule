@@ -46,6 +46,7 @@ bool SerialCommunicator::send(char message){
     DebugPrint("<ERROR> invalid value");
     return false;
   }
+  serial->listen();
   serial->write(message);
   sprintf(dprint_buff, "message = %c", message);
   DebugPrint(dprint_buff);
