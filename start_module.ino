@@ -17,7 +17,7 @@
 unsigned char slave_num;    // スレーブの数(ゴールモジュールを含む)
 DsubMasterCommunicator *dsubMasterCommunicator = NULL;    //  Dsub関係管理用
 SerialCommunicator *serialCommunicator = NULL;            //  シリアル通信管理用
-char dprint_buff[64];                                    //  デバッグ出力用バッファ
+char dprint_buff[64];                                     //  デバッグ出力用バッファ
 Servo myservo;                                            //  多回転サーボ動作用
 SoftwareSerial softwareSerial(PIN_SOFT_RX1, PIN_SOFT_TX1);    // RX, TX
 DFRobotDFPlayerMini dFPlayer;

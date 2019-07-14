@@ -17,9 +17,9 @@
 #define PIN_LED             5   //スタート部分のLEDの出力用ピン
 #define PIN_START_SW        12  //スタート部分のマイクロスイッチ
 #define PIN_VMOTOR          6   //振動モータ
-#define PIN_LED_STICK       14  //棒部分のLED出力用ピン
-#define PIN_SOFT_RX1        15  //DFPlayerMini用シリアル
-#define PIN_SOFT_TX1        16  //DFPlayerMini用シリアル
+#define PIN_LED_STICK       16  //棒部分のLED出力用ピン
+#define PIN_SOFT_RX1        14  //DFPlayerMini用シリアル
+#define PIN_SOFT_TX1        15  //DFPlayerMini用シリアル
 
 
 /* PC とのソフトウェアシリアル通信関係 */
