@@ -8,6 +8,7 @@
 #define I2C_DETECT_HIT      1     //  HITを検知したこと
 #define I2C_DETECT_GOAL     2     //  通過/ゴールを検知したこと
 #define I2C_CHECK_CONNECT   3     //  接続確認用
+#define I2C_END_TRANS       4     //  通信を終了すること
 
 //  PCへ送信する情報
 const char SERIAL_START   = 's';  //  開始

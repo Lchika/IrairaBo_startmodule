@@ -3,6 +3,8 @@
 #include <Wire.h>
 #include <Arduino.h>
 
+#define DEBUG_GOAL_BY_SERIAL_ON
+
 /**
  * @brief コンストラクタ
  * @param[in] slave_adress          スレーブアドレス
@@ -145,6 +147,12 @@ bool DsubMasterCommunicator::handle_dsub_event(void)
   //  スレーブからの返信を処理
   while(Wire.available()){
     byte message = Wire.read();
+#ifdef DEBUG_GOAL_BY_SERIAL_ON
+    if(Serial.available() > 0){
+      Serial.read();
+      message = I2C_DETECT_GOAL;
+    }
+#endif
     //  返信内容によって処理を変える
     switch(message){
       //  コース接触通知
@@ -176,6 +184,10 @@ bool DsubMasterCommunicator::handle_dsub_event(void)
           DebugPrint("GOAL from goal_module");
           //  PCにゲーム終了を通知
           _serialCommunicator->send(SERIAL_FINISH);
+          //  ゴールモジュールに通信終了を通知
+          Wire.beginTransmission(_comm_slave_address);
+          Wire.write(I2C_END_TRANS);
+          Wire.endTransmission();
           //  D-sub通信を終了
           this->dis_active();
         //  ゴール以外からの通知の場合
@@ -183,6 +195,12 @@ bool DsubMasterCommunicator::handle_dsub_event(void)
           DebugPrint("GOAL from slave_module");
           //  PCにモジュール通過を通知
           _serialCommunicator->send(SERIAL_THROUGH);
+          //  現在のスレーブに通信終了を通知
+          Wire.beginTransmission(_comm_slave_address);
+          Wire.write(I2C_END_TRANS);
+          Wire.endTransmission();
+          sprintf(dprint_buff, "end i2c with SLAVE%d", _comm_slave_address);
+          DebugPrint(dprint_buff);
           //  次のスレーブに通信開始を通知
           Wire.beginTransmission(++_comm_slave_address);
           Wire.write(I2C_BEGIN_TRANS);

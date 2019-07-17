@@ -12,6 +12,7 @@
 //#include <map>
 
 #define DFPLAYER_ON
+#define DEBUG_THROUGH_BY_SERIAL_ON
 
 /* クラス・変数宣言 */
 unsigned char slave_num;    // スレーブの数(ゴールモジュールを含む)
@@ -141,7 +142,15 @@ void loop(void) {
       myservo.write(80);  //一方方向へ回転
 
       //  スタートモジュールゴール判定処理
-      if(digitalRead(PIN_GOAL_START) == LOW) { //  通過したかどうか
+      if(digitalRead(PIN_GOAL_START) == LOW
+#ifdef DEBUG_THROUGH_BY_SERIAL_ON
+          || Serial.available() > 0
+#endif
+      ) {
+#ifdef DEBUG_THROUGH_BY_SERIAL_ON
+        if(Serial.available() > 0) Serial.read();
+#endif
+        //  通過したかどうか
         //  PCにモジュール通過を通知
         serialCommunicator->send(SERIAL_THROUGH);
         //  D-sub通信を開始する(スレーブアドレス0x01指定)
